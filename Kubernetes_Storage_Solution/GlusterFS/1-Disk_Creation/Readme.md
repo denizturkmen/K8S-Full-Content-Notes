@@ -14,5 +14,10 @@ sudo fdisk /dev/vdb
 > 8e
 > w
 
+“`
 
+“`
+cd teknokodi
+npm i
+npm run serve
 “`
