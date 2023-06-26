@@ -9,7 +9,6 @@ Disk type must be **LVM** for ***GlusterFS***.
 ## Run commands the following 
 
 ``` bash
-# 
 sudo fdisk /dev/vdb
   n
   p
@@ -18,4 +17,4 @@ sudo fdisk /dev/vdb
   8e
   w
 
-```bash
+```
