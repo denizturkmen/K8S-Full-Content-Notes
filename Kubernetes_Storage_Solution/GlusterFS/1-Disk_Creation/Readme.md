@@ -5,7 +5,7 @@
 Disk type must be **LVM** for ***GlusterFS***.
 
 ## Run commands the following  
-“`
+```
 sudo fdisk /dev/vdb
 > n
 > p
@@ -13,11 +13,5 @@ sudo fdisk /dev/vdb
 > t
 > 8e
 > w
+```
 
-“`
-
-“`
-cd teknokodi
-npm i
-npm run serve
-“`
