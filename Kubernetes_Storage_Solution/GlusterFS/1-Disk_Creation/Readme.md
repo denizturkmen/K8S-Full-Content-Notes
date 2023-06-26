@@ -14,9 +14,3 @@ sudo fdisk /dev/vdb
 > 8e
 > w
 ```
-
-## dss
-```
-Disk type must be **LVM** for ***GlusterFS***.
-
-```
