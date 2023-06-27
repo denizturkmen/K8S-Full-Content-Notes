@@ -6,9 +6,9 @@
 Disk type must be **LVM** for ***GlusterFS***.
 
 
-## Run commands the following 
+## You can create lvm by running the following commands
 
-``` bash
+```bash
 sudo fdisk /dev/vdb
   n
   p
@@ -17,4 +17,5 @@ sudo fdisk /dev/vdb
   8e
   w
 
-```
+```bash
+
