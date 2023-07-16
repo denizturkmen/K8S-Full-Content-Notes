@@ -1,0 +1,55 @@
+{
+    "clusters": [
+      {
+        "nodes": [
+                      {
+            "node": {
+              "hostnames": {
+                "manage": [
+                  "glusterfs-cluster-25"
+                ],
+                "storage": [
+                  "192.168.1.25"
+                ]
+              },
+              "zone": 1
+            },
+            "devices": [
+              "/dev/sdb1"
+            ]
+          },            {
+            "node": {
+              "hostnames": {
+                "manage": [
+                  "glusterfs-cluster-26"
+                ],
+                "storage": [
+                  "192.168.1.26"
+                ]
+              },
+              "zone": 1
+            },
+            "devices": [
+              "/dev/sdb1"
+            ]
+          },            {
+            "node": {
+              "hostnames": {
+                "manage": [
+                  "glusterfs-cluster-27"
+                ],
+                "storage": [
+                  "192.168.1.27"
+                ]
+              },
+              "zone": 1
+            },
+            "devices": [
+              "/dev/sdb1"
+            ]
+          }              
+        ]
+      }
+    ]
+  }
+  
