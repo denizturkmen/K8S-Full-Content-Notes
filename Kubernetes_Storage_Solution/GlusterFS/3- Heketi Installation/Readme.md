@@ -141,6 +141,7 @@ curl http://glusterfs-cluster-25:8080/hello
 Heketi topology install and configure
 Run the commands below
 ``` bash
+export HEKETI_CLI_SERVER=http://192.168.1.25:8080
 sudo vim /etc/heketi/topology.json
 sudo chown -R heketi:heketi /var/lib/heketi /var/log/heketi /etc/heketi
 
