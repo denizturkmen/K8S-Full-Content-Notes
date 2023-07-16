@@ -62,6 +62,10 @@ sudo gluster peer status
 ```
 
 
-# Referance
+## Referenace
+``` bash
 Install: https://docs.gluster.org/en/main/Install-Guide/Install/
 Configure: https://docs.gluster.org/en/main/Install-Guide/Configure/#for-debian
+
+
+```
