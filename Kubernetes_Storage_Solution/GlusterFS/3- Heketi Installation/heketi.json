@@ -20,12 +20,12 @@
     "_admin": "Admin has access to all APIs",
     "admin": {
       "_key_comment": "Set the admin key in the next line",
-      "key": ""
+      "key": "ivd7dfORN7QNeKVO"
     },
     "_user": "User only has access to /volumes endpoint",
     "user": {
       "_key_comment": "Set the user key in the next line",
-      "key": ""
+      "key": "gZPgdZ8NtBNj6jfp"
     }
   },
 

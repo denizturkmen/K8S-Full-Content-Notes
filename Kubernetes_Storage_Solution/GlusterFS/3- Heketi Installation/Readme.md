@@ -22,6 +22,7 @@ sudo heketi-cli --version
 Load all Kernel modules that will be required by **Heketi.**
 ``` bash
 sudo apt -y install thin-provisioning-tools 
+sudo su
 for i in dm_snapshot dm_mirror dm_thin_pool; do
   sudo modprobe $i
 done
@@ -46,8 +47,9 @@ sudo useradd -s /sbin/nologin --system -g heketi heketi
 Edit the Heketi configuration file
 ``` bash
 sudo vim /etc/heketi/heketi.json
+
 ```
-Note: heketi.json into Heketi directory
+**Note:** heketi.json into Heketi directory
 
 Generate Heketi SSH keys on heketi server machine
 ``` bash
@@ -130,6 +132,7 @@ sudo systemctl status heketi
 Check heketi port
 ``` bash
 sudo netstat -tuplen | grep LISTEN | grep heketi
+
 ```
 
 Check Heketi service 
@@ -141,27 +144,75 @@ curl http://glusterfs-cluster-25:8080/hello
 Heketi topology install and configure
 Run the commands below
 ``` bash
-export HEKETI_CLI_SERVER=http://192.168.1.25:8080
 sudo vim /etc/heketi/topology.json
 sudo chown -R heketi:heketi /var/lib/heketi /var/log/heketi /etc/heketi
 
-
 sudo heketi-cli topology load --json=/etc/heketi/topology.json
+
+sudo heketi-cli topology load --user admin --secret heketi_admin_secret --json=/etc/heketi/topology.json -> this OK
+sudo heketi-cli topology load --user admin --secret ivd7dfORN7QNeKVO --json=/etc/heketi/topology.json
+
+```
+
+
+Add the Heketi access credentials to your **~/.bashrc** file.
+sudo vim ~/.bashrc
+```
+export HEKETI_CLI_SERVER=http://192.168.1.25:8080
+export HEKETI_CLI_USER=admin
+export HEKETI_CLI_KEY="ivd7dfORN7QNeKVO"
+
+```
+
+Source file
+``` bash
+source ~/.bashrc
+
 ```
 
 Checking **Heketi-cluster;** run the commands below;
+**Note:** Run without **sudo** as user and group have changed
 ``` bash
 sudo heketi-cli --help
 sudo heketi-cli cluster list
+sudo heketi-cli node list
+sudo heketi-cli node info ID ( XXXXXXXXXXXXX )
 sudo heketi-cli topology info
-sudo heketi-cli cluster info 0e5f6cc9ed2bbc2c58889dcecca769bd
+sudo heketi-cli cluster info 3ce38366127986dcbe7af0a347ad99f9
 sudo tail -f /var/log/glusterfs/glusterd.log
 
 ```
 
+After loading topology file, run the command below to list your clusters.
+``` bash
+heketi-cli cluster list
 
+```
 
+List nodes available in the Cluster
+``` bash
+heketi-cli node list
+heketi-cli node info id
 
+heketi-cli node info 5d4a3b948fe7c9c9b23523e369c93d31
+heketi-cli cluster info 3ce38366127986dcbe7af0a347ad99f9
+
+```
+
+Let’s now create a Gluster volume to verify Heketi & GlusterFS is working
+``` bash
+heketi-cli volume create --size=1
+
+check
+heketi-cli volume list
+
+```
+
+Check new volume look using topology info
+``` bash
+heketi-cli topology info
+
+```
 
 
 ## Referenace
