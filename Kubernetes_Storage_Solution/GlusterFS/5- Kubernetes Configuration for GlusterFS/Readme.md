@@ -1,4 +1,4 @@
-Step by step: Kubernetes Installation and Configuration
+Step by step: Kubernetes Configuration
 
 
 Firstly, Check your heketi cluster
