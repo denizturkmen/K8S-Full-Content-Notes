@@ -61,11 +61,20 @@ sudo gluster peer status
 
 ```
 
+Useful command list 
+``` bash
+sudo gluster --help
+sudo gluster volume help
+sudo gluster volume list
+
+```
+
 
 ## Referenace
 ``` bash
 Install: https://docs.gluster.org/en/main/Install-Guide/Install/
 Configure: https://docs.gluster.org/en/main/Install-Guide/Configure/#for-debian
+Github repository: https://github.com/gluster/glusterfs/tree/v9.6
 
 
 ```
