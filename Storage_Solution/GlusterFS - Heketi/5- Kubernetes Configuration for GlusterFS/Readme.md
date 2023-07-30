@@ -3,7 +3,7 @@ Step by step: Kubernetes Configuration
 
 Firstly, Check your heketi cluster
 ``` bash
-sudo heketi-cli cluster list
+heketi-cli cluster list
 
 ```
 
@@ -36,8 +36,8 @@ data:
 EOF
 
 
-kubectl apply -f secret.yaml
 
+kubectl apply -f secret.yaml
 
 ```
 
@@ -60,10 +60,8 @@ parameters:
   secretNamespace: "default"
   volumetype: "replicate:3"
   volumenameprefix: "k8s-demo"
-  clusterid: "763f96aaee09e7f028297bdcb5b58f2e"
+  clusterid: "3ce38366127986dcbe7af0a347ad99f9"
 EOF
-
-
 
 kubectl apply -f storageClass.yaml
 
@@ -78,3 +76,5 @@ The **resturl** is the URL of your **heketi endpoint**
 **replicate:2** indicated the default replication factor for Gluster Volumes created. For more HA, use 3.
 **volumenameprefix:** By default dynamically provisioned volumes have the naming schema of vol_UUID format. 
 **763f96aaee09e7f028297bdcb5b58f2e** is the ID of the cluster obtained from the command heketi-cli cluster list
+
+
