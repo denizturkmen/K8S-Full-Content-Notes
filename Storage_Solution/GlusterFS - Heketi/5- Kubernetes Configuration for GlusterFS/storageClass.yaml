@@ -1,5 +1,5 @@
-apiVersion: storage.k8s.io/v1
 kind: StorageClass
+apiVersion: storage.k8s.io/v1
 metadata:
   name: gluster-heketi
 provisioner: kubernetes.io/glusterfs
@@ -8,35 +8,11 @@ volumeBindingMode: Immediate
 allowVolumeExpansion: true
 parameters:
   resturl: "http://192.168.1.25:8080" 
-  restauthenabled: "false"
   restuser: "admin" 
   secretName: "heketi-secret"
   secretNamespace: "default"
-  volumetype: "replicate:3"
-  volumenameprefix: "k8s-demo"
-  clusterid: "3ce38366127986dcbe7af0a347ad99f9"
+  volumetype: "replicate:2"
+  volumenameprefix: "k8s-dev"
+  clusterid: "481c05debed6fc3a670960e38e5f884d"
 
 ---
-
-
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: gluster-heketi
-  namespace: default
-  annotations:
-    storageclass.beta.kubernetes.io/is-default-class: "true"
-provisioner: kubernetes.io/glusterfs
-reclaimPolicy: Delete
-allowVolumeExpansion: true
-parameters:
-  resturl: "http://192.168.1.25:8080" 
-  restauthenabled: "true"
-  restuser: "admin"
-  secretNamespace: "default"
-  secretName: "heketi-secret"
-  volumetype: "replicate:3"
-  volumenameprefix: "k8s-dev"
-  gidMin: "40000"
-  gidMax: "50000"
-  clusterid: "3ce38366127986dcbe7af0a347ad99f9"

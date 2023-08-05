@@ -28,7 +28,7 @@ sudo vim /etc/hosts
 For **Ubuntu** Installation GlusterFS
 ``` bash
 sudo apt install software-properties-common
-sudo add-apt-repository ppa:gluster/glusterfs-7
+sudo add-apt-repository ppa:gluster/glusterfs-9
 sudo apt update
 sudo apt install -y glusterfs-server
 

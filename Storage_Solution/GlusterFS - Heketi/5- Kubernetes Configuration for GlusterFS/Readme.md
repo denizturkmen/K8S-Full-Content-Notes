@@ -21,7 +21,12 @@ Create Kubernetes Secret
 
 ``` bash
 echo -n "PASSWORD" | base64
-aXZkN2RmT1JON1FOZUtWTw==
+
+For this example,
+echo -n "ivd7dfORN7QNeKVO" | base64
+
+# Check
+echo -n "aXZkN2RmT1JON1FOZUtWTw==" | base64 -d
 
 cat <<EOF > secret.yaml
 apiVersion: v1
@@ -31,10 +36,10 @@ metadata:
   namespace: default
 type: "kubernetes.io/glusterfs"
 data:
-  # echo -n "PASSWORD" | base64
+  # echo -n "ivd7dfORN7QNeKVO" | base64
   key: aXZkN2RmT1JON1FOZUtWTw==
+type: kubernetes.io/glusterfs
 EOF
-
 
 
 kubectl apply -f secret.yaml
@@ -45,8 +50,8 @@ Create StorageClass
 
 ``` bash
 cat <<EOF > storageClass.yaml
-apiVersion: storage.k8s.io/v1
 kind: StorageClass
+apiVersion: storage.k8s.io/v1
 metadata:
   name: gluster-heketi
 provisioner: kubernetes.io/glusterfs
@@ -58,9 +63,10 @@ parameters:
   restuser: "admin" 
   secretName: "heketi-secret"
   secretNamespace: "default"
-  volumetype: "replicate:3"
-  volumenameprefix: "k8s-demo"
-  clusterid: "3ce38366127986dcbe7af0a347ad99f9"
+  volumetype: "replicate:2"
+  volumenameprefix: "k8s-dev"
+  clusterid: "481c05debed6fc3a670960e38e5f884d"
+
 EOF
 
 kubectl apply -f storageClass.yaml
@@ -78,3 +84,58 @@ The **resturl** is the URL of your **heketi endpoint**
 **763f96aaee09e7f028297bdcb5b58f2e** is the ID of the cluster obtained from the command heketi-cli cluster list
 
 
+Create Persistent volume
+``` bash
+cat <<EOF > pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: gluster-pvc
+ annotations:
+   volume.beta.kubernetes.io/storage-class: gluster-heketi
+spec:
+ accessModes:
+  - ReadWriteMany
+ resources:
+   requests:
+     storage: 1Gi
+EOF
+
+```
+
+Checking
+``` bash
+kubectl get pvc
+
+```
+
+Create Pods
+``` bash
+cat <<EOF > pods.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gluster-pod
+  labels:
+    name: gluster-pod
+spec:
+  containers:
+  - name: gluster-pod
+    image: busybox
+    command: ["sleep", "60000"]
+    volumeMounts:
+    - name: gluster-vol
+      mountPath: /usr/share/busybox 
+      readOnly: false
+  volumes:
+  - name: gluster-vol
+    persistentVolumeClaim:
+      claimName: gluster-pvc
+```
+
+
+Checking
+``` bash
+kubectl get pods
+
+```

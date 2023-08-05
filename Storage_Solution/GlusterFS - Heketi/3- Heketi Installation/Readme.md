@@ -1,25 +1,9 @@
 Step by Step: Heketi installation and configure
 
-Heketi downland and installation on glusterfs-cluster-25 machine
-Run the following commands from terminal.
 
-``` bash
-sudo wget https://github.com/heketi/heketi/releases/download/v7.0.0/heketi-v7.0.0.linux.amd64.tar.gz
-sudo tar -xvf heketi-v7.0.0.linux.amd64.tar.gz
-sudo chmod +x heketi/{heketi,heketi-cli}
-sudo cp heketi/{heketi,heketi-cli} /usr/bin
-sudo mkdir -p /var/lib/heketi /etc/heketi /var/log/heketi
 
-```
-
-Check heketi version
-``` bash
-sudo heketi --version
-sudo heketi-cli --version
-
-```
-
-Load all Kernel modules that will be required by **Heketi.**
+Load all Kernel modules that will be required by **Heketi.** 
+Running all glusterfs node
 ``` bash
 sudo apt -y install thin-provisioning-tools 
 sudo su
@@ -36,6 +20,25 @@ sudo echo dm_mirror | sudo tee -a /etc/modules
 
 ```
 
+Heketi downland and installation on glusterfs-cluster-25 machine
+Run the following commands from terminal.
+
+``` bash
+sudo wget https://github.com/heketi/heketi/releases/download/v10.4.0/heketi-v10.4.0-release-10.linux.amd64.tar.gz
+sudo tar -xvf heketi-v10.4.0-release-10.linux.amd64.tar.gz
+sudo chmod +x heketi/{heketi,heketi-cli}
+sudo cp heketi/{heketi,heketi-cli} /usr/bin
+sudo mkdir -p /var/lib/heketi /etc/heketi /var/log/heketi
+
+```
+
+Check heketi version
+``` bash
+sudo heketi --version
+sudo heketi-cli --version
+
+```
+
 Heketi Configuration
 Add heketi system user 
 ``` bash
@@ -46,6 +49,7 @@ sudo useradd -s /sbin/nologin --system -g heketi heketi
 
 Edit the Heketi configuration file
 ``` bash
+sudo cp heketi/heketi.json /etc/heketi
 sudo vim /etc/heketi/heketi.json
 
 ```
@@ -54,7 +58,6 @@ sudo vim /etc/heketi/heketi.json
 Generate Heketi SSH keys on heketi server machine
 ``` bash
 sudo ssh-keygen -m PEM -t rsa -b 4096 -q -f /etc/heketi/heketi_key
-
 or
 sudo ssh-keygen -f /etc/heketi/heketi_key -t rsa -N ''
 
@@ -69,8 +72,7 @@ ls -al
 ```
 
 Copy generated public key to all GlusterFS nodes
-**Note:** If ssh keys are run before they can **be copied** to **all glusterfs nodes**, you will get an **error**
- from the heketi service
+**Note:** If ssh keys are run before they can **be copied** to **all glusterfs nodes**, you will get an **error** from the heketi service
 ``` bash
 sudo su 
 for i in glusterfs-cluster-25 glusterfs-cluster-26 glusterfs-cluster-27; do
@@ -93,6 +95,14 @@ sudo ssh-copy-id -i /etc/heketi/heketi_key root@glusterfs-cluster-26
 sudo ssh-copy-id -i /etc/heketi/heketi_key root@glusterfs-cluster-27
 ```
 
+Also download sample environment file for Heketi and Set all directory permissions
+
+``` bash
+sudo wget -O /etc/heketi/heketi.env https://raw.githubusercontent.com/heketi/heketi/master/extras/systemd/heketi.env
+sudo chown -R heketi:heketi /var/lib/heketi /var/log/heketi /etc/heketi
+
+```
+
 
 Create a systemd file for heketi.service
 sudo vim /etc/systemd/system/heketi.service
@@ -102,12 +112,15 @@ Description=Heketi Server
 [Service]
 Type=simple
 WorkingDirectory=/var/lib/heketi
+EnvironmentFile=-/etc/heketi/heketi.env
+User=heketi
 ExecStart=/usr/bin/heketi --config=/etc/heketi/heketi.json
 Restart=on-failure
 StandardOutput=syslog
 StandardError=syslog
 [Install]
 WantedBy=multi-user.target
+
 
 ```
 
@@ -129,8 +142,11 @@ sudo systemctl status heketi
 
 ```
 
-Check heketi port
+Check heketi port before install net-tools
 ``` bash
+sudo apt update
+sudo apt install -y net-tools
+# Check
 sudo netstat -tuplen | grep LISTEN | grep heketi
 
 ```
@@ -173,12 +189,13 @@ source ~/.bashrc
 Checking **Heketi-cluster;** run the commands below;
 **Note:** Run without **sudo** as user and group have changed
 ``` bash
-sudo heketi-cli --help
-sudo heketi-cli cluster list
-sudo heketi-cli node list
-sudo heketi-cli node info ID ( XXXXXXXXXXXXX )
-sudo heketi-cli topology info
-sudo heketi-cli cluster info 3ce38366127986dcbe7af0a347ad99f9
+heketi-cli --help
+heketi-cli cluster list
+
+heketi-cli node list
+heketi-cli node info ID ( XXXXXXXXXXXXX )
+heketi-cli topology info
+heketi-cli cluster info 481c05debed6fc3a670960e38e5f884d
 sudo tail -f /var/log/glusterfs/glusterd.log
 
 ```
@@ -195,7 +212,7 @@ heketi-cli node list
 heketi-cli node info id
 
 heketi-cli node info 5d4a3b948fe7c9c9b23523e369c93d31
-heketi-cli cluster info 3ce38366127986dcbe7af0a347ad99f9
+heketi-cli cluster info 481c05debed6fc3a670960e38e5f884d
 
 ```
 
@@ -211,6 +228,12 @@ heketi-cli volume list
 Check new volume look using topology info
 ``` bash
 heketi-cli topology info
+
+```
+
+You can also use the below command to view the nodes:
+``` bash
+sudo gluster pool list
 
 ```
 

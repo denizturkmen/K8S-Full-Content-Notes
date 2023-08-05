@@ -20,10 +20,10 @@ sudo apt update
 sudo apt list kubeadm -a
 
 ## Installation latest version command below
-sudo apt install wget curl vim git kubelet kubeadm kubectl -y
+sudo apt install kubelet kubeadm kubectl -y
 
 ## Specific version installation
-sudo apt install -y kubelet=1.26.6-00  kubeadm=1.26.6-00  kubectl=1.26.6-00 
+sudo apt install -y kubelet=1.25.1-00  kubeadm=1.25.1-00  kubectl=1.25.1-00 
 
 ## Check version
 kubelet --version
