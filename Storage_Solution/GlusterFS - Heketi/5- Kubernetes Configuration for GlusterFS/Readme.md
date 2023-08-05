@@ -73,6 +73,8 @@ kubectl apply -f storageClass.yaml
 
 ```
 
+**Notes**
+``` bash
 **gluster-heketi** is the name of the StorageClass to be created.
 The valid options for reclaim policy are **Retain, Delete or Recycle**. 
 The **volumeBindingMode** field controls when volume binding and dynamic provisioning should occur. Valid options are **Immediate & WaitForFirstConsumer.** 
@@ -82,7 +84,7 @@ The **resturl** is the URL of your **heketi endpoint**
 **replicate:2** indicated the default replication factor for Gluster Volumes created. For more HA, use 3.
 **volumenameprefix:** By default dynamically provisioned volumes have the naming schema of vol_UUID format. 
 **763f96aaee09e7f028297bdcb5b58f2e** is the ID of the cluster obtained from the command heketi-cli cluster list
-
+```
 
 Create Persistent volume
 ``` bash
