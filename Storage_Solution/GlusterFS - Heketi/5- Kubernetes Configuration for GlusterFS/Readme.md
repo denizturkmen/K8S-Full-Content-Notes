@@ -10,7 +10,7 @@ heketi-cli cluster list
 Instalation to glusterfs-client all kubernetes nodes. master + worker
 ``` bash
 sudo apt-get install software-properties-common
-sudo add-apt-repository ppa:gluster/glusterfs-7
+sudo add-apt-repository ppa:gluster/glusterfs-9
 sudo apt install glusterfs-client -y
 
 ```
