@@ -1,4 +1,4 @@
-# KKubernetes Instalation with Kubeadm
+# Kubernetes Instalation with Kubeadm
 
 OS upgrade and reboot machine
 ``` bash
