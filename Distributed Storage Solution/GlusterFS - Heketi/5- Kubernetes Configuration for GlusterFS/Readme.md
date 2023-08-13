@@ -141,3 +141,23 @@ Checking
 kubectl get pods
 
 ```
+
+Adding Manuel Volume
+``` bash
+kubectl exec -it pod_name -- sh
+vim test
+  glusterfs
+  heketi
+  beni bitirdi..
+```
+
+Cheking glusterfs
+``` bash
+sudo gluster volume info
+
+```
+
+
+
+
+
