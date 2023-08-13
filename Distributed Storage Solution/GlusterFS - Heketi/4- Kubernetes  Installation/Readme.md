@@ -4,7 +4,8 @@ OS upgrade and reboot machine
 ``` bash
 sudo apt update
 sudo apt -y full-upgrade
-
+# Reboot
+sudo reboot
 ```
 
 Install kubelet, kubeadm and kubectl
