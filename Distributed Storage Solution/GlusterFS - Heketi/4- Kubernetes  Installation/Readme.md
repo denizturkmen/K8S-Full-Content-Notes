@@ -140,11 +140,11 @@ sudo kubeadm config images pull --cri-socket /run/containerd/containerd.sock
 sudo vim /etc/hosts
     IP_Addreses         Dns_Name  
 
-    192.168.1.7         kubernetes.glusterfs.deniz.master.internal
-    192.168.1.7         k8s-master-1    
+    192.168.1.3         kubernetes.glusterfs.deniz.master.internal
+    192.168.1.3         k8s-master-1    
 
 # Create cluster
-sudo kubeadm init --control-plane-endpoint="kubernetes.glusterfs.deniz.master.internal:6443" --apiserver-advertise-address=192.168.1.7 --node-name k8s-master-1 --pod-network-cidr=192.168.0.0/24
+sudo kubeadm init --control-plane-endpoint="kubernetes.glusterfs.deniz.master.internal:6443" --apiserver-advertise-address=192.168.1.3 --node-name k8s-master-1 --pod-network-cidr=192.168.0.0/24
 or
 sudo kubeadm init --pod-network-cidr=192.168.0.0/24 --upload-certs --control-plane-endpoint="kubernetes.glusterfs.deniz.master.internal" --node-name k8s-master-1 --cri-socket /run/containerd/containerd.sock  -> not try
 
