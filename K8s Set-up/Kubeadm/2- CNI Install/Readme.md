@@ -17,3 +17,16 @@ coming soon
  ```
 
  
+# Refereances:
+``` bash
+WeaveNet:
+ https://www.weave.works/docs/net/latest/kubernetes/kube-addon/
+ https://github.com/weaveworks/weave/
+
+Calico:
+
+Flannel: 
+
+Cilium: 
+
+```
