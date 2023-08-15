@@ -150,11 +150,3 @@ sudo kubeadm init --pod-network-cidr=192.168.0.0/24 --upload-certs --control-pla
 
  ```
 
-
-**Important Note:** Add the control plane endpoint value k8s to **/etc/hosts** on all master and worker nodes.s
-
- Install Kubernetes network plugin: WeaveNet
- ``` bash
-kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
-
- ```
