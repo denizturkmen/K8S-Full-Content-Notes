@@ -1,20 +1,25 @@
 MetalLB Installation and Set-up
 
-if you usage as ipvs mode to kube-proxy, ARP mode should enable.
+If you usage as ipvs mode to kube-proxy, ARP mode should enable.
 For this,
 **kubectl edit configmap -n kube-system kube-proxy**
 ``` bash
 ipvs:
  strictARP: true
-
 ```
 
 To be with sed editor
-
 ``` bash
 kubectl get configmap kube-proxy -n kube-system -o yaml | \ sed -e "s/strictARP: false/strictARP: true/" | \ kubectl apply -f — -n kube-system
 
 ```
+
+All node untaint
+``` bash
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+
+```
+
 
 Run the following command and install metallb
 ``` bash
@@ -53,7 +58,7 @@ spec:
 # Apply metallb-config
 kubectl apply -f metallb-config.yaml
 
-# Check metallb-config
+# Control metallb-config
 kubectl get pods -n metallb-system
 
 # Desribe
@@ -65,3 +70,12 @@ kubectl describe ipaddresspools first-pool -n metallb-system
 
 
 
+
+
+# Referance
+``` bash
+Install: https://metallb.universe.tf/installation/
+Configuration: https://metallb.universe.tf/configuration/
+Usage: https://metallb.universe.tf/usage/
+
+```
