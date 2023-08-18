@@ -8,7 +8,7 @@ sudo apt -y full-upgrade
 sudo reboot
 ```
 
-Install kubelet, kubeadm and kubectl
+Install **kubelet, kubeadm and kubectl**
 ``` bash
 sudo apt install curl apt-transport-https -y
 curl -fsSL  https://packages.cloud.google.com/apt/doc/apt-key.gpg|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/k8s.gpg
@@ -36,7 +36,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 ```
 
-Disable Swap Space
+Disable **Swap** Space
 ``` bash
 ## Temporary
 sudo swapoff -a 
@@ -51,7 +51,7 @@ free -h
 
 ```
 
-Enable kernel modules and configure sysctl
+Enable **kernel modules** and **configure sysctl**
 ``` bash
 # Enable kernel modules
 sudo modprobe overlay
@@ -148,5 +148,21 @@ sudo kubeadm init --control-plane-endpoint="kubernetes.dev.env.test:6443" --apis
 or
 sudo kubeadm init --pod-network-cidr=192.168.0.0/24 --upload-certs --control-plane-endpoint="kubernetes.dev.env.test" --node-name k8s-master-1 --cri-socket /run/containerd/containerd.sock  -> not try
 
+
+# To start using your cluster, you need to run the following as a regular user:
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
  ```
 
+
+
+# Referance
+```
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd
+
+
+```
