@@ -1,0 +1,31 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpa-name
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: deployment-name
+  minReplicas: 1
+  maxReplicas: 7
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 10
+        periodSeconds: 1800
+      - type: Pods
+        value: 1
+        periodSeconds: 1800
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
+      - type: Percent
+        value: 25
+        periodSeconds: 50
+      - type: Pods
+        value: 1
+        periodSeconds: 50
+      selectPolicy: Max

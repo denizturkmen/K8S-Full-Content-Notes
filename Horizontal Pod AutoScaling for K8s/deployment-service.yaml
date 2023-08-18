@@ -1,0 +1,59 @@
+##################################
+# HPA Service
+###################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: hba-svc
+  namespace: hpa
+spec:
+  selector:
+    app: hba
+  type: NodePort
+  sessionAffinity: None
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  ports:
+  - name: hba
+    protocol: TCP
+    port: 5000
+    targetPort: 5000
+    nodePort: 32562
+---
+##################################
+# HPA Deployments
+###################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  hpa
+  namespace: hpa
+  labels:
+    app:  hba
+spec:
+  selector:
+    matchLabels:
+      app: hba
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  hba
+    spec:
+      containers:
+      - name:  hba
+        image:  denizturkmen/app1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 500Mi
+          limits:
+            cpu: 200m
+            memory: 700Mi
+      restartPolicy: Always
