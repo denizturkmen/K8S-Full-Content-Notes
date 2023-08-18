@@ -137,11 +137,6 @@ sudo kubeadm config images pull
 sudo kubeadm config images pull --cri-socket /run/containerd/containerd.sock
 
 ## Bootstrap with shared endpoint (DNS name for control plane API)
-sudo vim /etc/hosts
-    IP_Addreses         Dns_Name  
-
-    192.168.1.7         kubernetes.dev.env.test
-    192.168.1.7         k8s-master-1    
 
 # Create cluster
 sudo kubeadm init --control-plane-endpoint="kubernetes.dev.env.test:6443" --apiserver-advertise-address=192.168.1.7 --node-name k8s-master-1 --pod-network-cidr=192.168.0.0/24
@@ -155,7 +150,24 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
- ```
+```
+
+Master or worker node add
+IP addresses and dns name add into /etc/hosts
+``` bash
+sudo vim /etc/hosts
+    IP_Addreses         Dns_Name  
+
+    192.168.1.7         kubernetes.dev.env.test
+    192.168.1.9         k8s-worker-1    
+
+# The following run the  command
+sudo kubeadm join kubernetes.dev.env.test:6443 --token v54jxi.8601uzold8y1tiq7 \
+	--discovery-token-ca-cert-hash 
+
+```
+
+
 
 
 
