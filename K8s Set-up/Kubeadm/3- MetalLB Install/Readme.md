@@ -35,6 +35,8 @@ kubectl get pods -n metallb-system
 
 Metallb configuration
 Open metallb-config yaml via vim editor.
+We will make a Layer 2 Configuration. 
+Layer 2 mode is the simplest to configure: in many cases, you don’t need any protocol-specific configuration, only IP addresses.
 
 ``` bash
 apiVersion: metallb.io/v1beta1
@@ -61,14 +63,15 @@ kubectl apply -f metallb-config.yaml
 # Control metallb-config
 kubectl get pods -n metallb-system
 
+# Check Ipaddresspools
+kubectl get ipaddresspools -n metallb-system
+
+
 # Desribe
 kubectl describe ipaddresspools first-pool -n metallb-system
 
 
 ```
-
-
-
 
 
 
