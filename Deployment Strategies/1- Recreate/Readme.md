@@ -7,7 +7,7 @@ Recreate is the simplest deployment strategy. A recreate deployment would go som
 **!Important** : Terminate the **old version** and **release the new one**
 We use full migration. For example **db migration**
 
-Hands-on
+**Hands-on**
 
 First, we will deploy the deployment v1 version, For this;
 ``` bash
