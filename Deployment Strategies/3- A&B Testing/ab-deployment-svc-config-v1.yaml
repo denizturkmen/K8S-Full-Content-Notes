@@ -1,0 +1,102 @@
+##################################################
+# A&B Testing ConfigMap V1 - Manifest
+##################################################
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: version-1
+  namespace: default
+data:
+  index.html: |
+    <style>html,body{display:flex;align-items:center;justify-content:center;font-size:25vh}</style>
+    version_1
+---
+##################################################
+# A&B Testing Deployment V1 - Manifest
+##################################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-version-1
+  namespace: default
+  labels:
+    app: v1
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: v1
+  template:
+    metadata:
+      labels:
+        app: v1
+    spec:
+      volumes:
+        - name: version-1
+          configMap:
+            name: version-1
+      containers:
+      - name: version-1
+        image: nginx
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 50m
+            memory: 100Mi
+        readinessProbe:
+          failureThreshold: 1
+          periodSeconds: 5
+          timeoutSeconds: 1
+          successThreshold: 1
+          tcpSocket:
+            port: 80
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        startupProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        volumeMounts:
+          - name: version-1
+            mountPath: /usr/share/nginx/html
+---
+##################################################
+# A&B Testing Service V1 - Manifest
+##################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-svc-v1
+  namespace: default
+  labels:
+    app: v1
+spec:
+  type: ClusterIP
+  selector:
+    app: v1
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
