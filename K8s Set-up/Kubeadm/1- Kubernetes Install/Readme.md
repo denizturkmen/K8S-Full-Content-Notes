@@ -8,6 +8,13 @@ sudo apt -y full-upgrade
 sudo reboot
 ```
 
+For Quicksight Setup
+```
+sudo su -
+curl https://raw.githubusercontent.com/denizturkmen/K8S-Full-Content-Notes/main/K8s%20Set-up/Kubeadm/1-%20Kubernetes%20Install/k8s.sh | bash -
+
+```
+
 Install **kubelet, kubeadm and kubectl**
 ``` bash
 sudo apt install curl apt-transport-https -y
