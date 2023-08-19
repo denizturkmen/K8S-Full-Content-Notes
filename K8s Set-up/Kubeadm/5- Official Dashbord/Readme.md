@@ -19,7 +19,7 @@ You have to add **etc/hosts** entry and IP Addresses.
 ``` bash
 sudo vim /etc/hosts
     IP_Adresses         Dns_name
-    192.168.1.201       
+    192.168.1.201       dashboard.dev.com
 
 ```
 
