@@ -1,4 +1,4 @@
-# Raft Consesnsus Algorith
+# Raft Consensum Algorith
 
 ```
 Server Count / 2 + 1 
