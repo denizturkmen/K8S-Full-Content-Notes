@@ -78,5 +78,6 @@ kubectl get secret admin-user -n kubernetes-dashboard -o jsonpath={".data.token"
 https://github.com/kubernetes/dashboard
 Admin USER: https://computingforgeeks.com/create-admin-user-to-access-kubernetes-dashboard/
 Token: https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+Non-Expiring-Token: https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#:~:text=To%20create%20a%20non-expiring,with%20that%20generated%20token%20data.
 
 ```
