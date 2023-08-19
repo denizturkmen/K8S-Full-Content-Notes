@@ -1,18 +1,18 @@
 ##################################################
-# Recreate Service - Manifest
+# RollingUpdate Service - Manifest
 ##################################################
 apiVersion: v1
 kind: Service
 metadata:
-  name: recreate-dep-test
+  name: roolingupdate-test
   namespace: default
 spec:
   selector:
-    app: recreate-dep-test
+    app: roolingupdate
   type: NodePort
   ports:
-  - name: recreate-dep-test
+  - name: roolingupdate-dep-test
     protocol: TCP
     port: 80
     targetPort: 5000 
-    nodePort: 32568
+    nodePort: 32425

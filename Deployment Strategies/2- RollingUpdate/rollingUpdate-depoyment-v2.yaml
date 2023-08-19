@@ -1,0 +1,49 @@
+##################################################
+# RollingUpdate Deployment V2 - Manifest
+##################################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  roolingupdate-dep
+  namespace: default
+  labels:
+    app:  roolingupdate
+spec:
+  selector:
+    matchLabels:
+      app: roolingupdate
+  replicas: 8
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 50%
+  template:
+    metadata:
+      labels:
+        app:  roolingupdate
+    spec:
+      containers:
+      - name:  roolingupdate
+        image:  denizturkmen/app2
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        ports:
+        - containerPort:  80
+          name:  roolingupdate
+      restartPolicy: Always
+---
