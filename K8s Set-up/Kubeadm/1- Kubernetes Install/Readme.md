@@ -58,6 +58,15 @@ free -h
 
 ```
 
+For Quicksight Swap-Disable
+``` bash
+sudo su -
+curl https://raw.githubusercontent.com/denizturkmen/K8S-Full-Content-Notes/main/K8s%20Set-up/Kubeadm/1-%20Kubernetes%20Install/swap-disable.sh | bash -
+
+```
+
+
+
 Enable **kernel modules** and **configure sysctl**
 ``` bash
 # Enable kernel modules
@@ -136,14 +145,19 @@ lsmod | grep br_netfilter
 ## Enable kubelet service
 sudo systemctl enable kubelet
 
-## Pull container images
+## Pull container images. Only master node pull images
 sudo kubeadm config images pull
 
 ## If you have multiple CRI sockets, please use --cri-socket to select one:
 ## Containerd
 sudo kubeadm config images pull --cri-socket /run/containerd/containerd.sock
 
-## Bootstrap with shared endpoint (DNS name for control plane API)
+# IP addresses and dns name add into /etc/hosts
+sudo vim /etc/hosts
+    IP_Addreses         Dns_Name  
+
+    192.168.1.7         kubernetes.dev.env.test
+    192.168.1.7         k8s-master-1    
 
 # Create cluster
 sudo kubeadm init --control-plane-endpoint="kubernetes.dev.env.test:6443" --apiserver-advertise-address=192.168.1.7 --node-name k8s-master-1 --pod-network-cidr=192.168.0.0/24
@@ -169,8 +183,9 @@ sudo vim /etc/hosts
     192.168.1.9         k8s-worker-1    
 
 # The following run the  command
-sudo kubeadm join kubernetes.dev.env.test:6443 --token v54jxi.8601uzold8y1tiq7 \
-	--discovery-token-ca-cert-hash 
+sudo kubeadm join kubernetes.dev.env.test:6443 --token 36yras.6m0w4ruxjfx32b5x \
+> --discovery-token-ca-cert-hash sha256:6ac19a8321fa789a8571c748eb70b9c4014dba46f96c5d379a8cc4cd853886a0 \
+> --node-name k8s-worker-1 
 
 ```
 
