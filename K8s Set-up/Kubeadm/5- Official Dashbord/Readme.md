@@ -68,6 +68,8 @@ kubectl get secret -n kubernetes-dashboard
 # Token
 kubectl get secret admin-user -n kubernetes-dashboard -o jsonpath={".data.token"} | base64 -d
 
+kubectl describe secret -n kubernetes-dashboard admin-user
+
 ```
 
 
