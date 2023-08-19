@@ -180,7 +180,7 @@ sudo vim /etc/hosts
     IP_Addreses         Dns_Name  
 
     192.168.1.7         kubernetes.dev.env.test
-    192.168.1.9         k8s-worker-1    
+    192.168.1.8         k8s-worker-1    
 
 # The following run the  command
 sudo kubeadm join kubernetes.dev.env.test:6443 --token 36yras.6m0w4ruxjfx32b5x \
