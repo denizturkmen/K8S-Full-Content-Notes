@@ -1,0 +1,36 @@
+##################################################
+# Recreate Deployment V2 - Manifest
+##################################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recreate-dep-test
+  namespace: default
+  labels:
+    app: recreate-dep-test
+spec:
+  selector:
+    matchLabels:
+      app: recreate-dep-test
+  replicas: 8
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: recreate-dep-test
+    spec:
+      containers:
+      - name: recreate-dep-test
+        image: denizturkmen/app2
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort:  80
+          name: recreate-test
+---

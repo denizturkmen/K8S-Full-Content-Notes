@@ -1,0 +1,18 @@
+##################################################
+# Recreate Deployment Manifest
+##################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: recreate-dep-test
+  namespace: default
+spec:
+  selector:
+    app: recreate-dep-test
+  type: NodePort
+  ports:
+  - name: recreate-dep-test
+    protocol: TCP
+    port: 80
+    targetPort: 5000 
+    nodePort: 32568
