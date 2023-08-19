@@ -1,4 +1,4 @@
-# Recreate and RollingUpdate
+# Recreate 
 
 What is **Recreate Deployment?**
 
