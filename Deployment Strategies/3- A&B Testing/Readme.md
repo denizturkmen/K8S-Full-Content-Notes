@@ -40,6 +40,17 @@ curl http://Cluster_IP:Port_number
 ```
 
 Thirdly, we will deploy the ingress for v1 version. 
+``` bash
+# Apply
+kubeclt apply -f ab-ingress-v1.yaml
+
+# Checking ingress
+kubectl get ingress
+
+# Run script.sh 
+while true; do curl http://abtesting.com && sleep 1 && echo ""; done;
+
+```
 
 We must add the IP addresses and dns name under **/etc/hosts**.
 **sudo vim /etc/hosts** .For this;
@@ -53,10 +64,10 @@ kubeclt apply -f ab-ingress-v1.yaml
 # Checking ingress
 kubectl get ingress
 
-
 ```
 
-4th, we will deploy the ingress for v2 version. 
+Then, we will deploy the ingress for v2 version. 
+
 ``` bash
 # Apply
 kubeclt apply -f ab-ingress-v2.yaml
