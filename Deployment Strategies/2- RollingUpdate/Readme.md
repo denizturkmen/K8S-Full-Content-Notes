@@ -8,7 +8,7 @@ A Rolling Update, on the other hand, gradually replaces pod instances with newer
 First, we will deploy the deployment v1 version, For this;
 ``` bash
 # Apply
-kubeclt apply -f rollingUpdate-depoyment-v1.yaml
+kubeclt apply -f rollingUpdate-deployment-v1.yaml
 
 # Checking pods status
 kubectl get pods 
@@ -21,7 +21,7 @@ kubectl get replicaset
 Secondly, Service created. For this
 ``` bash
 # Apply
-kubeclt apply -f  recreate-services.yaml
+kubeclt apply -f  rollingUpdate-deployment.yaml
 
 # Checking pods status
 kubectl get services
