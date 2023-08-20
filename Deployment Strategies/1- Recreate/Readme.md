@@ -5,7 +5,6 @@ What is **Recreate Deployment?**
 Recreate is the simplest deployment strategy. A recreate deployment would go something like this. Version 1 of the app is deployed. Deployment starts, all pods running version 1 of the app are deleted. Immediately followed by version 2 of the application being deployed. The biggest draw back with recreate deployments is the small window of downtime.
 
 **!Important** : Terminate the **old version** and **release the new one**
-We use full migration. For example **db migration**
 
 **Hands-on**
 
