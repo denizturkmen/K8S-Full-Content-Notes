@@ -35,7 +35,7 @@ curl http://192.168.1.7:32425
 Finally, we deploy v1 to v2.
 ``` bash
 # Apply
-kubeclt apply -f  rollingUpdate-depoyment-v2.yaml
+kubeclt apply -f  rollingUpdate-deployment-v2.yaml
 
 # Checking pods status
 kubectl get pods 
