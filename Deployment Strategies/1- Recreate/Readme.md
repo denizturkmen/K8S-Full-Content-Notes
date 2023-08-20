@@ -38,7 +38,7 @@ curl http://192.168.1.7:32568
 Finally, we deploy v1 to v2.
 ``` bash
 # Apply
-kubeclt apply -f  recreate-deployment-v1.yaml
+kubeclt apply -f  recreate-deployment-v2.yaml
 
 # Checking pods status
 kubectl get pods 
