@@ -1,0 +1,60 @@
+##################################################
+# BlueGree Deployment V2 - Manifest
+##################################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app-2
+  namespace: default
+  labels:
+    app: web-app
+spec:
+  selector:
+    matchLabels:
+      app: web-app
+      strategies: green
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: web-app
+        strategies: green
+    spec:
+      containers:
+      - name: web-app
+        image: denizturkmen/rollingupdatev2:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 100m
+            memory: 1024Mi
+          limits:
+            cpu: 1000m
+            memory: 2048Mi
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        ports:
+        - containerPort: 80
+          name: web-app
+      restartPolicy: Always
+

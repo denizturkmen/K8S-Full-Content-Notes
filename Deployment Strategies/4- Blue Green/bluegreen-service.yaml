@@ -1,0 +1,19 @@
+##################################################
+# BlueGree Service - Manifest
+##################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-svc
+  namespace: default
+spec:
+  selector:
+    app: web-app
+    strategies: blue
+  type: NodePort
+  ports:
+  - name: web-svc
+    protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 32565
