@@ -49,7 +49,7 @@ kubeclt get svc
 
 ```
 
-Redirection traffic from v1 to v2 pod.
+Redirection traffic from blue to green pod.
 ``` bash
 # Edit service
 kubectl edit svc web-svc
