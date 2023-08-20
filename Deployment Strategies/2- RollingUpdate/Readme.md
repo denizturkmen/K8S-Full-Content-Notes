@@ -21,7 +21,7 @@ kubectl get replicaset
 Secondly, Service created. For this
 ``` bash
 # Apply
-kubeclt apply -f  rollingUpdate-deployment.yaml
+kubeclt apply -f  rollingUpdate-service.yaml
 
 # Checking pods status
 kubectl get services
