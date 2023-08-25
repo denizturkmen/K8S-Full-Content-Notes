@@ -39,6 +39,7 @@ kubectl get pods
 kubectl get service
 
 # Checking get configmaps
+kubectl get configmaps
 
 # Checking the container inside the application
 curl http://Cluster_IP:Port_number
