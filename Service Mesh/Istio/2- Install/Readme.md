@@ -32,12 +32,21 @@ You can enable and install it with the following command
 istioctl install --set profile=profile_name -y
 istioctl install --set profile=demo -y
 
+# Controlling istio-system namespca
+kubectl get all -n istio-system
+
+# Install verify
+istioctl verify-install
+
 # Profile list
 https://istio.io/latest/docs/setup/additional-setup/config-profiles/
 
 # Injection istio using namespave
 kubectl label namespace namespace_name istio-injection=enabled
 kubectl label namespace default istio-injection=enabled
+
+# Injection labek and selector show 
+kubectl get ns --show-labels
 
 ```
 
