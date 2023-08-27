@@ -3,16 +3,16 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: hpa-name # HorizontalPodAutoscaler name
 spec:
-  scaleTargetRef:
+  scaleTargetRef: # Autoscale settings related to the target pod to be used
     apiVersion: apps/v1
     kind: Deployment # Scale k8s object name
     name: deployment-name 
-  minReplicas: 1 # Min pod replica
-  maxReplicas: 7 # Max pod replica
+  minReplicas: 1 # at least how many pods will work
+  maxReplicas: 7 # at most how many pods will work
   behavior:
     scaleDown: # CPU or RAM scale as utilization 
-      stabilizationWindowSeconds: 300
-      policies:
+      stabilizationWindowSeconds: 300 # Used to determine at least how many seconds the system will remain stable
+      policies: # Scale politics
       - type: Percent 
         value: 10
         periodSeconds: 1800 # Check period sn
@@ -21,11 +21,11 @@ spec:
         periodSeconds: 1800
     scaleUp:
       stabilizationWindowSeconds: 0
-      policies:
+      policies: # Scale politics
       - type: Percent
-        value: 25
-        periodSeconds: 50
+        value: 25 
+        periodSeconds: 25
       - type: Pods
         value: 1
-        periodSeconds: 50
+        periodSeconds: 25
       selectPolicy: Max

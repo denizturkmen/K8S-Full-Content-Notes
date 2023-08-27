@@ -68,6 +68,9 @@ kubectl get -n hpa horizontalpodautoscalers.autoscaling
 # CPU workload increase
 while true; do curl http://192.168.1.7:32562 && sleep 0.01 && echo ""; done;
 
+# Removed hpa 1 example
+kubectl delete -n hpa horizontalpodautoscalers.autoscaling hpa
+
 # Declarative: Creating horizontal deployment scale. Scale up and scale down example
 kubectl apply -f declarative-auto-scaling-3.yaml
 
