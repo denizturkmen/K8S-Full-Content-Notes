@@ -1,21 +1,21 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: hpa-name
+  name: hpa-name # HorizontalPodAutoscaler name
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
-    kind: Deployment
-    name: deployment-name
-  minReplicas: 1
-  maxReplicas: 7
+    kind: Deployment # Scale k8s object name
+    name: deployment-name 
+  minReplicas: 1 # Min pod replica
+  maxReplicas: 7 # Max pod replica
   behavior:
-    scaleDown:
+    scaleDown: # CPU or RAM scale as utilization 
       stabilizationWindowSeconds: 300
       policies:
-      - type: Percent
+      - type: Percent 
         value: 10
-        periodSeconds: 1800
+        periodSeconds: 1800 # Check period sn
       - type: Pods
         value: 1
         periodSeconds: 1800

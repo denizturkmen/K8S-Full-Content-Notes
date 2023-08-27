@@ -60,7 +60,7 @@ kubectl autoscale -n hpa deployment deployment_name --min=X --max=X --cpu-percen
 kubectl autoscale -n hpa deployment hpa --min=1 --max=5 --cpu-percent=20
 
 # Declarative: Creating horizontal deployment scale
-kubectl apply -f declarative-auto-scaling.yaml
+kubectl apply -f declarative-auto-scaling-1.yaml
 
 # Checking Horizontal Pod Scaling
 kubectl get -n hpa horizontalpodautoscalers.autoscaling
@@ -68,6 +68,11 @@ kubectl get -n hpa horizontalpodautoscalers.autoscaling
 # CPU workload increase
 while true; do curl http://192.168.1.7:32562 && sleep 0.01 && echo ""; done;
 
+# Declarative: Creating horizontal deployment scale. Scale up and scale down example
+kubectl apply -f declarative-auto-scaling-3.yaml
+
+# Checking Horizontal Pod Scaling
+kubectl get -n hpa horizontalpodautoscalers.autoscaling
 
 ```
 
