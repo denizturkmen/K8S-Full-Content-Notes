@@ -96,6 +96,7 @@ kubectl get -n hpa horizontalpodautoscalers.autoscaling
 # Referance
 ``` bash
 https://github.com/kubernetes-sigs/metrics-server
-
+https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
+https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
 
 ```
