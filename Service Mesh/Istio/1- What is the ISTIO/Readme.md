@@ -47,13 +47,17 @@ At the core, Envoy is a network proxy operating at the **L3 and L4** layers of t
 
 **Security:** Envoy can also enforce security policies and apply access control and rate-limiting on communication between underlying services
 
+What is the **envoy proxy?**
+It is a high-performance open source product written in C++ that intercepts the inbound and outbound traffic of services within the entire service mesh layer.
 
 
 **2- Control Plane:** is responsible for **managing and configuring** the **Envoy proxies** in the data plane. The component that is responsible for this in the control plane is **istiod.** Here, istiod is responsible for **converting high-level routing rules and traffic control** behavior into **Envoy-specific configurations** and propagating them to sidecars at runtime.
 
 If we recall the architecture of the Istio control plane from some time back, we'll notice that it used to be a set of independent components working together. It comprised components like Pilot for service discovery, Galley for configuration, Citadel for certificate generation, and Mixer for extensibility. Due to complexity, these individual components were merged into a single component called **istiod**.
 
+What is the **sidecar?**
 
+Sidecar is actually a proxy. Briefly, the proxy defined for each microservice is called. Located next to services. Services provide their access to target services through proxy through the proxy of that service.
 
 
 
