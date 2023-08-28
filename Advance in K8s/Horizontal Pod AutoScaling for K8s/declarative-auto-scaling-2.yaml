@@ -1,3 +1,6 @@
+##################################################
+# Horizontal Pod Auto Scaling 2  - Manifest
+##################################################
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
