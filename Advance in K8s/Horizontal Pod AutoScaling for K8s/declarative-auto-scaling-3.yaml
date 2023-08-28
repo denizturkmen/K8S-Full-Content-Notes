@@ -19,7 +19,7 @@ spec:
         value: 20
         periodSeconds: 15
     scaleUp:
-      stabilizationWindowSeconds: 0
+      stabilizationWindowSeconds: 40
       policies:
       - type: Percent
         value: 20
