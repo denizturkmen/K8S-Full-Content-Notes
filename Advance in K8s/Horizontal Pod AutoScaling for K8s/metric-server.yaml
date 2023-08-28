@@ -139,7 +139,7 @@ spec:
         - --metric-resolution=15s
         command:
         - /metrics-server
-        - — kubelet-insecure-tls
+        - --kubelet-insecure-tls
         - --kubelet-preferred-address-types=InternalIP
         - --kubelet-preferred-address-types=InternalDNS,InternalIP,ExternalDNS,ExternalIP,Hostname
         image: registry.k8s.io/metrics-server/metrics-server:v0.6.4

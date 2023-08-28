@@ -27,7 +27,7 @@ kubectl edit deployments -n kube-system metrics-server
 # The following commands should be added under the deployment
     command:
     - /metrics-server
-    - — kubelet-insecure-tls
+    - --kubelet-insecure-tls
     - --kubelet-preferred-address-types=InternalIP
     - --kubelet-preferred-address-types=InternalDNS,InternalIP,ExternalDNS,ExternalIP,Hostname
 
