@@ -52,6 +52,21 @@ kubectl get secret
 
 ```
 
+Then let's do the private image deployment. For this
+``` bash
+# Apply 
+kubectl apply -f deployment-private-regcred.yaml
+
+# Checking for deployment
+kubectl get deployments
+
+# Checking for pods
+kubectl get pods
+
+# Checking describe
+kubectl describe pods pod_name
+
+
 
 **2 way:** Pull an Image from a Private Registry
 first, must be **docker login**
