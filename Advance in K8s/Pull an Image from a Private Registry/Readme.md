@@ -83,6 +83,7 @@ kubect get pods
 ``` bash
 https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 https://jamesdefabia.github.io/docs/user-guide/kubectl/kubectl_create_secret_docker-registry/
+https://kubernetes.io/docs/concepts/configuration/secret/
 
 
 ```
