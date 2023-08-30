@@ -65,7 +65,7 @@ kubectl get pods
 
 # Checking describe
 kubectl describe pods pod_name
-
+```
 
 
 **2 way:** Pull an Image from a Private Registry
