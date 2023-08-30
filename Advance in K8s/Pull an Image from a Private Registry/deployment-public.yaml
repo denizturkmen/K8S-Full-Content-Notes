@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  public-image-dep
+  namespace: default
+  labels:
+    app:  public-image-dep
+spec:
+  selector:
+    matchLabels:
+      app: public-image-dep
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  public-image-dep
+    spec:
+      containers:
+      - name:  public-image-dep
+        image:  denizyoutube/public_image:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort:  80
+          name:  public
+      restartPolicy: Always
