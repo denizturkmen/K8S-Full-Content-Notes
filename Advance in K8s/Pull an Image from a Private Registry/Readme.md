@@ -35,6 +35,7 @@ kubectl describe pods pod_name
 ```
 
 Thirdth, One secret must create for pull private image.
+
 **Note:** Command to run to learn registry Url.
 first login to docker hub then run below command: 
 docker login command: **docker login -uusername**
