@@ -8,6 +8,8 @@ As the deployment of distributed services, such as in a **Kubernetes-based syste
 
 **Basically**, a service mesh takes away the responsibility of managing all **service-to-service** communication within a distributed software system.
 
+The way service mesh is able to do that is through an array of **network proxies**. Essentially, requests between services are routed through **proxies** that run alongside the services but sit **outside in the infrastructure layer**
+
 Service-to-service communication is what makes a distributed application possible. Routing this communication, both within and across application clusters, becomes increasingly complex as the number of services grow. Istio helps reduce this complexity while easing the strain on development teams.
 
 
