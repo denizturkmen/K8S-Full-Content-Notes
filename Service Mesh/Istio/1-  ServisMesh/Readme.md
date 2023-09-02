@@ -25,8 +25,7 @@ A virtual service consists of **one or more routing** rules that are evaluated i
 
 # Referance
  ``` bash
-Get starting: https://istio.io/latest/docs/setup/getting-started/
-Service Mesh: https://istio.io/latest/about/service-mesh/
-Architecture: https://istio.io/latest/docs/ops/deployment/architecture/
+What is the Service Mesh: https://istio.io/latest/about/service-mesh/
+
 
 ```

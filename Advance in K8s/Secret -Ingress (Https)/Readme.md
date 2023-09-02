@@ -1,1 +1,2 @@
-Coming soon
+# Usage secret for Ingress
+
