@@ -1,7 +1,7 @@
 # What is the ISTIO
 
 Istio is an **open-source** implementation of the **service mesh** originally developed by IBM, Google, and Lyft. It can layer transparently onto a **distributed application** and provide all the benefits of a service mesh like **traffic management, security, and observability.**
-It's designed to work with a variety of deployments, like **on-premise, cloud-hosted, in Kubernetes containers**, and in servicers running on virtual machines. Although Istio is **platform-neutral**, it's quite often used together with **microservices** deployed on the **Kubernetes platform.**
+It's designed to work with a variety of deployments, like **on-premise, cloud-hosted, in Kubernetes containers**, and in services running on virtual machines. Although Istio is **platform-neutral**, it's quite often used together with **microservices** deployed on the **Kubernetes platform.**
 
 **Secure service-to-service** communication in a cluster with TLS encryption, strong identity-based authentication and authorization
 **Automatic load balancing** for HTTP, gRPC, WebSocket, and TCP traffic
