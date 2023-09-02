@@ -3,8 +3,19 @@
 Hands-On
 
 You can deployment it with the following command.
-We've enabled auto-injection of **Envoy sidecar** proxies for the istio_ns namespace
+We've enabled auto-injection of **Envoy sidecar** proxies for the default namespace
+
+Look at **istio documents** for scenarios
+
+Hands-on 
 ``` bash
+# Injection istio using namespave
+kubectl label namespace namespace_name istio-injection=enabled
+kubectl label namespace default istio-injection=enabled
+
+# Injection labek and selector show 
+kubectl get ns --show-labels
+
 # Apply
 kubectl apply -f bookinfo.yaml
 
@@ -58,5 +69,8 @@ kubectl apply -f samples/addons
 # Referance
 ```
 BookInfo: https://istio.io/latest/docs/examples/bookinfo/
+Manuel Injection: https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/#manual-sidecar-injection
+
+
 
 ```

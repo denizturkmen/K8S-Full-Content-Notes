@@ -41,12 +41,6 @@ istioctl verify-install
 # Profile list
 https://istio.io/latest/docs/setup/additional-setup/config-profiles/
 
-# Injection istio using namespave
-kubectl label namespace namespace_name istio-injection=enabled
-kubectl label namespace default istio-injection=enabled
-
-# Injection labek and selector show 
-kubectl get ns --show-labels
 
 ```
 
