@@ -62,6 +62,6 @@ istioctl profile list
 ```
 Dowland: https://istio.io/latest/docs/setup/getting-started/#download
 Profile: https://istio.io/latest/docs/setup/additional-setup/config-profiles/
-
+Realases: https://github.com/istio/istio/releases
 
 ```
