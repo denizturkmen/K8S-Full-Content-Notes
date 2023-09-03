@@ -32,7 +32,7 @@ You can enable and install it with the following command
 istioctl install --set profile=profile_name -y
 istioctl install --set profile=demo -y
 
-# Controlling istio-system namespca
+# Controlling istio-system namespace
 kubectl get all -n istio-system
 
 # Install verify
