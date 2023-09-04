@@ -1,4 +1,4 @@
-# How to k8s certificate upgrade
+# How to K8s Certificates Renewal
 
 Firstly, Checking our cluster
 ``` bash
