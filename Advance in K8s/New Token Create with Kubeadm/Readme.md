@@ -20,7 +20,7 @@ kubeadm init phase upload-certs --upload-certs
 sudo kubeadm token create --certificate-key XXXXXXXXXXXXXXXXXXXXXXXX --print-join-command
 
 # For instance 
-sudo kubeadm token create --certificate-key 9c7a0dc7decab29fd2f44fc91e35c93c1a07e0137eb69e4555eebfb0bc765d23 --print-join-command --node-name k8s-master-2
+sudo kubeadm token create --certificate-key 9c7a0dc7decab29fd2f44fc91e35c93c1a07e0137eb69e4555eebfb0bc765d23 --print-join-command 
 
 ```
 
