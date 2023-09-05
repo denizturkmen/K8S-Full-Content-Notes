@@ -33,7 +33,7 @@ sudo kubeadm join kubernetes.dev.env.test:6443 --token wwydlo.xxbhqbkpq3rip9qy -
 ```
 
 **Note: Container runtime, kubelet, kubeadm and kubectl** need to load all associated items on the **worker node.**
-Creating a new token with kubeadm for master node worker node
+Creating a new token with kubeadm for worker node
 ``` bash
 # list of token
 sudo kubeadm token list
