@@ -48,7 +48,7 @@ sudo kubeadm token create --help
 sudo kubeadm token create --print-join-command
 
 # For instance
-sudo kubeadm join kubernetes.dev.env.test:6443 --token thcbhg.d3owm52l6owryxgc --discovery-token-ca-cert-hash sha256:8128ce844199816ae9129b9159b669522eaad15baafc6f2e719aeb45f4a09fcd 
+sudo kubeadm join kubernetes.dev.env.test:6443 --token thcbhg.d3owm52l6owryxgc --discovery-token-ca-cert-hash sha256:8128ce844199816ae9129b9159b669522eaad15baafc6f2e719aeb45f4a09fcd  --node-name k8s-worker-1
 
 ```
 
