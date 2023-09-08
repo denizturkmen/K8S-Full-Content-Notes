@@ -10,3 +10,10 @@ kubectl apply --kustomize github.com/kubenav/deploy/kustomize
 kubectl get svc,pods -n kubeanv
 
 ```
+
+
+# Referance
+``` bash
+https://github.com/kubenav/kubenav
+
+```
