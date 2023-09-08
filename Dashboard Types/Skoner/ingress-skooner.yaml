@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: skooner
+  namespace: kube-system
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: skooner.dev.com
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: skooner
+            port:
+              number: 80
