@@ -1,7 +1,5 @@
 # Skooner Dashboard Installation for Kubernetes
 
-**Note:** Lens control panel is now **paid.**
-
 
 Installation on ubuntu 20.04
 ``` bash
