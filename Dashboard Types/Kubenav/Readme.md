@@ -7,7 +7,7 @@ Installation on ubuntu 20.04
 kubectl apply --kustomize github.com/kubenav/deploy/kustomize
 
 #Checking
-kubectl get svc,pods -n kubeanv
+kubectl get svc,pods -n kubenav
 
 ```
 
