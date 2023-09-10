@@ -1,4 +1,4 @@
-# Example Istıo 
+# Example Istio: BookInfo 
 
 Hands-On
 
@@ -13,7 +13,7 @@ Hands-on
 kubectl label namespace namespace_name istio-injection=enabled
 kubectl label namespace default istio-injection=enabled
 
-# Injection labek and selector show 
+# Injection label and selector show 
 kubectl get namespaces --show-labels
 kubectl get namespaces default --show-labels 
 
@@ -77,28 +77,6 @@ export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
 echo $GATEWAY_URL
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # Referance
 ```
