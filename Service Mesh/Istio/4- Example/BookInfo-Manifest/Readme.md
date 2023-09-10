@@ -14,13 +14,14 @@ kubectl label namespace namespace_name istio-injection=enabled
 kubectl label namespace default istio-injection=enabled
 
 # Injection labek and selector show 
-kubectl get ns --show-labels
+kubectl get namespaces --show-labels
+kubectl get namespaces default --show-labels 
 
 # Apply
 kubectl apply -f bookinfo.yaml
 
-# Checking pod and service
-kubectl get pods,svc
+# Checking deployments, pod and service
+kubectl get deployments,pods,svc
 
 # Checking service accounts
 kubectl get sa
@@ -52,13 +53,46 @@ istioctl analyze
 ```
 
 
-
-View the dashboard
+ingress name and ingress namespace export via ISTIO-APIs
 ``` bash
-# Apply
-kubectl apply -f samples/addons
+export INGRESS_NAME=istio-ingressgateway
+export INGRESS_NS=istio-system
 
 ```
+
+Ingress
+``` bash
+# Ip addresss for istio-ingressgateway
+export INGRESS_HOST=$(kubectl -n "$INGRESS_NS" get service "$INGRESS_NAME" -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+
+# Port number to http
+export INGRESS_PORT=$(kubectl -n "$INGRESS_NS" get service "$INGRESS_NAME" -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
+
+# Checking
+echo $INGRESS_HOST
+echo $INGRESS_PORT
+
+# Export and check Gateway 
+export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
+echo $GATEWAY_URL
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -68,6 +102,7 @@ kubectl apply -f samples/addons
 
 # Referance
 ```
+https://istio.io/latest/docs/setup/getting-started/
 BookInfo: https://istio.io/latest/docs/examples/bookinfo/
 Manuel Injection: https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/#manual-sidecar-injection
 
