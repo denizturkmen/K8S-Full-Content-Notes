@@ -60,7 +60,7 @@ kubectl uncordon controlplane
 
 ```
 
-Upgrade worker nodes
+Secondly, Upgrade worker nodes
 ``` bash
 # ssh 
 ssh node01
