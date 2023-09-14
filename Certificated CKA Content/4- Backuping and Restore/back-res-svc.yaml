@@ -1,0 +1,14 @@
+#################################################
+# Service: Backup Restore
+#################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: backup-service
+  namespace: default
+spec:
+  selector:
+    app: etcd-backup-restore
+  ports:
+  - port: 80
+    targetPort: 80

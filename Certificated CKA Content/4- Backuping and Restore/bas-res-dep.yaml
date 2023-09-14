@@ -1,0 +1,32 @@
+#################################################
+# Deployment: Backup Restore
+#################################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bac-res-dep
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: etcd-backup-restore
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 2
+      maxSurge: 2
+  template:
+    metadata:
+      labels:
+        app: etcd-backup-restore
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        resources:
+         limits:
+            memory: "128Mi"
+            cpu: "500m"
