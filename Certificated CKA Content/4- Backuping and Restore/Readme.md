@@ -70,7 +70,6 @@ ETCDCTL_API=3 etcdctl snapshot restore --data-dir <data-dir-location> snapshotdb
 
 ETCDCTL_API=3 \
 etcdctl snapshot restore snapshotdb_name \
---endpoints=https://172.30.1.2:2379\
 --data-dir=/var/lib/etcd-snapshot
 
 # changed host past from /var/lib/etcd to /var/lib/etcd-snapshot 
