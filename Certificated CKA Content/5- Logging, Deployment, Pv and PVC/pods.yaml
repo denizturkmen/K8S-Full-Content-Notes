@@ -1,0 +1,23 @@
+##################################################
+# Pods
+##################################################
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx3
+  labels:
+    app: nginx
+spec:
+  containers:
+    - name: pv-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: pv-storage
+  volumes:
+    - name: pv-storage
+      persistentVolumeClaim:
+        claimName: pv-claim

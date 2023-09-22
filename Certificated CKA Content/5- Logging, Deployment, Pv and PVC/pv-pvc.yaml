@@ -1,0 +1,46 @@
+##################################################
+# Persistent Volume
+##################################################
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pv-0
+  labels:
+    app: test
+spec:
+  hostPath:
+    path: "/mnt/data"
+  capacity:
+    storage: 500Mi
+  accessModes:
+    - ReadWriteOnce
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - node01
+---
+##################################################
+# Persistent Volume Claims
+##################################################
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pv-claim-0
+  labels:
+    app: test
+spec:
+  resources:
+    requests:
+      storage: 500Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ""
+  selector:
+    matchLabels:
+      app: test
+---
