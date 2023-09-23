@@ -1,0 +1,18 @@
+##################################################
+# Secret-TLS Service - Manifest
+##################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-svc
+  namespace: web
+spec:
+  selector:
+    app: web-app
+  type: ClusterIP
+  ports:
+  - name: web-svc
+    protocol: TCP
+    port: 80
+    targetPort: 80
+    
