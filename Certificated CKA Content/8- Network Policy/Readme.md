@@ -100,6 +100,7 @@ ports:
 ```
 
 **Note:** There are 3 types that we can define in **egress**, just like ingress.
+
     1- ipBlock
 
     2- NamespaceSelector
