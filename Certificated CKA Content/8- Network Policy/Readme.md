@@ -287,7 +287,7 @@ kubectl get networkpolicies -n b
 
 ```
 
-**Note:** Let's pay attention to the and and or logic
+**Note:** Let's pay attention to the **and (&&)** and **or (||)** logic
 
 5- Network Policy create: Allowing access from pod-c to pod-b but preventing from pod-a to pod-b
 ``` bash
