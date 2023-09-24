@@ -61,7 +61,7 @@ ingress:
         - protocol: TCP
           port: 6379
 
-``
+```
 
 for example: ingress_2
 ``` bash
