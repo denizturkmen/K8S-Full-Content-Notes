@@ -1,4 +1,4 @@
-# Service Types & COntrol Plane And Worker Node Down
+# Service Types & Control Plane And Worker Node Down
 
 
 Question_1: Let's expose in the deployment nodeport type and let the host port be 80 nodeport 31562
