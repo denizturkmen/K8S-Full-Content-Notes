@@ -11,11 +11,11 @@ metadata:
 spec:
   tls:
   - hosts:
-      - denizturkmen.com
+      - denizturkmen.devops-deniz.net
     secretName: ing-tls
   ingressClassName: nginx
   rules:
-  - host: denizturkmen.com
+  - host: denizturkmen.devops-deniz.net
     http:
       paths:
       - backend:

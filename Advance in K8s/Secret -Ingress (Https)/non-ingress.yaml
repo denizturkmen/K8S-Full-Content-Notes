@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: denizturkmen.com
+  - host: denizturkmen.devops-deniz.net
     http:
       paths:
       - backend:

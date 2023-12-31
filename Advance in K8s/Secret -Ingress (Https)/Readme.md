@@ -1,41 +1,16 @@
-# 
-
-step by step
-``` bash
-1- certbot install
-2- dns challange start
-    txt record ache_challend and answer
-3- keys location
-4- mv keys
-5- created secret 
-6- deployment
-7- service CLUSTERIP
-8- tls ingress configuration
-```
-
-Install certbort on ubuntu
-``` bash
-# update package
-sudo apt update
-
-# install
-sudo apt install certbot -y
-
-# dns challange
-sudo certbot certonly --manual --preferred-challenges=dns --email turkmen_deniz@hotmail.com  --server https://acme-v02.api.letsencrypt.org/directory --agree-tos -d devops-deniz.net
-
-
-
-```
+# Https Connection with Ingress-Controller 
 
 
 Created secret tls for Ingress
 ``` bash
+# create ns
+kubectl create ns web
+
 # Template
 kubectl create secret tls tls_name -n namespace_name --key=key --cert=crt
 
 # Apply
-kubectl create secret tls ing-tls -n web --key=denizturkmen.com.key --cert=denizturkmen.com.crt
+kubectl create secret tls ing-tls -n web --key=denizturkmen.devops-deniz.net.key --cert=denizturkmen.devops-deniz.net.crt
 
 # Checking
 kubectl get secrets -n web
@@ -68,7 +43,7 @@ kubectl get service -n web
  
 ```
 
-Now let's create an ingress without tls
+Now let's create an ingress without TLS
 ``` bash
 # Apply service
 kubectl apply -f non-ingress.yaml
@@ -76,9 +51,21 @@ kubectl apply -f non-ingress.yaml
 # Checking service
 kubectl get ingress -n web
 
- 
+# adding /etch/hosts to dns
+    192.168.1.200   denizturkmen.devops-deniz.net
+
 ```
 
+Now let's create an ingress with TLS
+``` bash
+# Apply service
+kubectl apply -f tls-ingress.yaml
+
+# Checking service
+kubectl get ingress -n web
+
+
+```
 
 
 
