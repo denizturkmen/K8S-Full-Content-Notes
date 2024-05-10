@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: denizturkmen-clusterbinding
+subjects:
+- kind: User
+  name: denizturkmen
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: denizturkmen-role
+  apiGroup: rbac.authorization.k8s.io

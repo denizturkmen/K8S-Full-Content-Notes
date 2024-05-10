@@ -1,0 +1,8 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: denizturkmen-role
+rules:
+- apiGroups: [""]
+  resources: ["nodes", "pods", "deployments", "statefulsets", "services", "configmaps", "secrets"]
+  verbs: ["get", "watch", "list", "create", "update", "patch"]
