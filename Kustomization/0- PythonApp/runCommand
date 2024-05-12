@@ -1,0 +1,2 @@
+docker run -e MY_VARIABLE="new_value" -p 5000:5000 your_image_name
+
