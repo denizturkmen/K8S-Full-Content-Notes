@@ -18,15 +18,16 @@ docker run --name dev -e MY_VARIABLE="dev" -dp 5001:5000 denizturkmen/python:env
 
 ```
 
-Install kustomization
+Install kustomization after check kubectl version
 ``` bash
-# Install on Linux
+# Install on Linux 
+curl -s "https://raw.githubusercontent.com/\ 
+kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
 
-
-# Install on Mac
-
+# Install on Mac with homebrew
+brew install kustomize
 
 # Install on Windows
-
+choco install kustomize
 
 ```

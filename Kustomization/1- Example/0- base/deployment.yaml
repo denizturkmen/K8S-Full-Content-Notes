@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-dev-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-dev
+  template:
+    metadata:
+      labels:
+        app: web-dev
+    spec:
+      containers:
+      - name: web-dev
+        image: denizturkmen/python:latest
+        ports:
+        - containerPort: 5000
+      restartPolicy: Always
+---

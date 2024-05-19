@@ -1,0 +1,13 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: web-dev-service
+spec:
+  selector:
+    app:  web-dev
+  type:  ClusterIP
+  ports:
+  - name:  http
+    port: 5000
+    targetPort: 5000

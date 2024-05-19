@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-dev-deployment
+spec:
+  replicas: 3 # Update the replica count to 3
+  template:
+    spec:
+      containers:
+      - name: nginx
+        image: denizturkmen/python:env1
+        resources:
+          limits:
+            cpu: "200" # Lower CPU limit to 200m (0.2 CPU cores)
+            memory: "256Mi" # Lower memory limit to 256 MiB
+          requests:
+            cpu: "100" # Lower CPU request to 100m (0.1 CPU cores)
+            memory: "128Mi"
+        env:
+        - name: MY_VARIABLE
+          value: This is deployment environment.....  
+---
