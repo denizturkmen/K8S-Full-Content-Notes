@@ -1,21 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-dev-deployment
+  name: web-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: web-dev
+      app: web
   template:
     metadata:
       labels:
-        app: web-dev
+        app: web
     spec:
       containers:
-      - name: web-dev
-        image: denizturkmen/python:latest
+      - name: python-flask
+        image: nginx
         ports:
         - containerPort: 5000
-      restartPolicy: Always
----
