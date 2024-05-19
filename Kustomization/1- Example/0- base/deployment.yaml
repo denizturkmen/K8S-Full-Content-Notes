@@ -16,4 +16,6 @@ spec:
       - name: python-flask
         image: nginx
         ports:
-        - containerPort: 5000
+        - name: flask 
+          containerPort: 5000
+
