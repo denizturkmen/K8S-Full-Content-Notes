@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../base
+
+# namePrefix: dev-
+# nameSuffix: "-001"
+# namespace: dev
+
+patches:
+- path: patch-service.yaml
+- path: patch-deployment.yaml
+- path: patch-dep-probe.yaml
+- path: patch-dep-resource.yaml
+- path: patch-dep-env.yaml
+- path: patch-configmap-env.yaml
+- path: patch-secret-env.yaml
