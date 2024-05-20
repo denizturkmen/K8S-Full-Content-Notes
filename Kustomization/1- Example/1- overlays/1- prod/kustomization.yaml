@@ -4,13 +4,14 @@ kind: Kustomization
 resources:
 - ../../base
 
-namePrefix: dev-
+namePrefix: prod-
 # nameSuffix: "-001"
-namespace: dev
+namespace: prod
 
 patches:
-- path: dev-service.yaml
-- path: dev-deployment.yaml
+- path: prod-service.yaml
+- path: prod-deployment.yaml
+- path: prod-namespace.yaml
 
   #images:
   #- name: nginx:latest

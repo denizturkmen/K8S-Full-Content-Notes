@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+spec:
+  replicas: 2 # Update the replica count to 3
+  template:
+    spec:
+      containers:
+      - name: python-flask
+        image: denizturkmen/python:env1
+        resources:
+          limits:
+            cpu: "500m" # Lower CPU limit to 200m (0.2 CPU cores)
+            memory: "512Mi" # Lower memory limit to 256 MiB
+          requests:
+            cpu: "300m" # Lower CPU request to 100m (0.1 CPU cores)
+            memory: "256Mi"
+        env:
+        - name: MY_VARIABLE
+          value: "This is production environment....."
