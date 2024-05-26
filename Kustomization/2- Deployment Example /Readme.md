@@ -25,6 +25,7 @@ Example of Deployment: dev envrionment
         │   └── kustomization.yaml
         └── prod
             ├── prod-deployment.yaml
+            └── namespace.yaml
             └── kustomization.yaml
 
 # build dev env: go to directory
