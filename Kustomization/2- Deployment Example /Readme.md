@@ -29,7 +29,7 @@ Example of Deployment: dev envrionment
             └── kustomization.yaml
 
 # build dev env: go to directory
-cd /kıustomize/overlays/dev
+cd /kustomize/overlays/dev
 kustomize build .
 
 # apply
@@ -54,10 +54,11 @@ Example of Deployment: prod envrionment. Let's patch it to 5 replicas
         │   └── kustomization.yaml
         └── prod
             ├── prod-deployment.yaml
+            └── namespace.yaml
             └── kustomization.yaml
 
 # build dev env: go to directory
-cd /kıustomize/overlays/prod
+cd /kustomize/overlays/prod
 kustomize build .
 
 # apply
