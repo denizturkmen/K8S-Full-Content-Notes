@@ -1,0 +1,14 @@
+---
+# Kustomize Feature List
+# https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/#kustomize-feature-list
+
+namespace: prod
+namePrefix: prod-
+
+resources:
+- ../../base
+- namespace.yaml
+
+patches:
+- path: prod-deployment.yaml
+- path: namespace.yaml
