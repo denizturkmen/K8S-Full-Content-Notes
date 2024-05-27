@@ -48,7 +48,7 @@ kubectl exec -it pod_name -- env
 
 ```
 
-Example of ConfigMapGenerator: prod environment. Let's patch it to 2 replicas and read file for configmap.
+Example of SecretGenerator: prod environment. Let's patch it to 2 replicas and read file for secret.
 ``` bash
 # both dev and prod must create directory 
 ├── kustomize
