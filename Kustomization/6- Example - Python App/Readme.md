@@ -13,25 +13,21 @@ kustomize version
 
 ```
 
-Example of SecretMapGenerator: dev environment. 
+Example of python-app: dev environment. 
 ``` bash
 # both dev and prod must create directory 
 ├── kustomize
   ├── base
     │   ├── deployment.yaml
-    │   ├── namespace.yaml
-    │   ├── service.yaml
     │   ├── kustomization.yaml
+    │   │   ├── prod
+    │────     ├── more-secret-deployment.yaml
+    │────     ├── kustomization.yaml       
     └ overlays
         ├── dev
         │   └── kustomization.yaml
-        │   └── namespace.yaml
-        │   └── service.yaml
-        │   └── kustomization.yaml
         └── prod
-            ├── prod-deployment.yaml
-            ├── prod-service.yaml
-            ├── prod-namespace.yaml
+            └── namespace.yaml
             └── kustomization.yaml
 
 # build dev env: go to directory
@@ -44,10 +40,11 @@ or
 kubectl apply -k .
 
 # check
-kubectl get pods -n dev
-kubectl get secrets -n dev
-
-
+kubectl get pods -n default
+kubectl get secrets -n default
+kubectl get secrets -o yaml 
+  echo -n "XXXX" | base64 -d 
+kubectl exec -it pod_name -- env
 
 ```
 
@@ -57,19 +54,15 @@ Example of SecretGenerator: prod environment. Let's patch it to 2 replicas and r
 ├── kustomize
   ├── base
     │   ├── deployment.yaml
-    │   ├── namespace.yaml
-    │   ├── service.yaml
     │   ├── kustomization.yaml
+    │   │   ├── prod
+    │────     ├── more-secret-deployment.yaml
+    │────     ├── kustomization.yaml       
     └ overlays
         ├── dev
         │   └── kustomization.yaml
-        │   └── namespace.yaml
-        │   └── service.yaml
-        │   └── kustomization.yaml
         └── prod
-            ├── prod-deployment.yaml
-            ├── prod-service.yaml
-            ├── prod-namespace.yaml
+            └── namespace.yaml
             └── kustomization.yaml
 
 
@@ -85,5 +78,7 @@ kubectl apply -k .
 # check
 kubectl get pods -n prod
 kubectl get secrets -n prod
+kubectl get deployments -n prod
+kubectl exec -it -n prod pods/pod_name -- env
 
 ```
