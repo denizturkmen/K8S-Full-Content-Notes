@@ -23,7 +23,7 @@ spec:
       serviceAccountName: default
       containers:
       - name: backend
-        image: denizturkmen/backend:latest
+        image: denizyoutube/private_image:latest
         imagePullPolicy: IfNotPresent
         resources:
           requests:
