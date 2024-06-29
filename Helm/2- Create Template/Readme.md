@@ -23,7 +23,9 @@ helm create hello-wolrd
 ``` bash
 kubectl create namespace test
 helm install -f hello-wolrd/values.yaml -n test hello-wolrd ./hello-wolrd
-
+or
+cd hello-world
+helm install hello-world -n test -f values.yaml .
 ```
 
 ### Learn About hello-world Release
