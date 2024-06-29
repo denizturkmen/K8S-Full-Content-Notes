@@ -1,9 +1,8 @@
 # How to create helm template with cli
 
 
-### Hello-world example
+### Hello-world example: Initialize a Helm Chart Repository
 ``` bash
-# Initialize a Helm Chart Repository
 helm repo add stable https://charts.helm.sh/stable
 
 ```
@@ -22,7 +21,6 @@ helm create hello-wolrd
 
 ### Install Hello-worls Helm Chart
 ``` bash
-
 kubectl create namespace test
 helm install -f hello-wolrd/values.yaml -n test hello-wolrd ./hello-wolrd
 
