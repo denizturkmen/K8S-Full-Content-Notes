@@ -8,34 +8,33 @@ helm repo add stable https://charts.helm.sh/stable
 
 ```
 
+### List Available Charts
 ``` bash
-# List Available Charts
 helm search repo stable
 
 ```
 
+### Create Hello-world Example
 ``` bash
-# Create Hello-world Example
 helm create hello-wolrd
 
 ```
 
-
+### Install Hello-worls Helm Chart
 ``` bash
-# Install Hello-worls Helm Chart
+
 kubectl create namespace test
 helm install -f hello-wolrd/values.yaml -n test hello-wolrd ./hello-wolrd
 
 ```
 
-
+### Learn About hello-world Release
 ``` bash
-# Learn About hello-world Release
 helm ls -n test
 
 ```
 
-Clean Up
+### Clean Up
 ``` bash
 # Uninstall a Release
 $ helm uninstall -n dev hello-wolrd
