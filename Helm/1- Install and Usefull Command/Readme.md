@@ -19,6 +19,10 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.
 sudo apt-get update
 sudo apt-get install helm
 
+
+# check version
+helm version
+
 ```
 
 ### How to install to helm with script: debian/ubuntu
@@ -45,6 +49,10 @@ helm repo ls
 
 # Updatig helm repo 
 helm repo update 
+
+# search repo
+helm search repo repo_name
+helm search repo bitnami
 
 ```
 

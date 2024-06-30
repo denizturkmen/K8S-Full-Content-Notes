@@ -37,10 +37,10 @@ helm ls -n test
 ### Clean Up
 ``` bash
 # Uninstall a Release
-$ helm uninstall -n dev hello-wolrd
+helm uninstall -n test hello-world
 
 # remove stable repo
-$ helm repo remove stable
+helm repo remove stable
 
 ```
 
