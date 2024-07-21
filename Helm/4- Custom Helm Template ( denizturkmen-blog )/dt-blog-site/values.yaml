@@ -1,0 +1,47 @@
+
+replicaCount: 1
+
+namespace:
+  name: blog
+
+image:
+  repository: denizturkmen/webui
+  pullPolicy: Always
+  tag: "latest"
+
+imagePullSecrets: []
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 80
+  nodePort: 30000
+
+ingress:
+  enabled: true
+  annotations: 
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: denizturkmen.com.tr
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+ 
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
