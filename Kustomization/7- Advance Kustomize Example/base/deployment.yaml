@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python
+  namespace: default
+  labels:
+    app: web
+spec:
+  selector:
+    matchLabels:
+      app: web
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      serviceAccountName: default
+      containers:
+      - name: python
+        image: denizturkmen/python:X.XX.X
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        livenessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        envFrom:
+          - secretRef:
+              name: env-secret
+        ports:
+        - containerPort: 5000
+          name: python
+      #   volumeMounts:
+      #   - name: python-index-volume
+      #     mountPath: /usr/share/python/html/index.html
+      #     subPath: index.html
+      # volumes:
+      #   - name: python-index-volume
+      #     configMap:
+      #       name: python-index
+      restartPolicy: Always
+---
