@@ -58,9 +58,10 @@ spec:
         volumeMounts:
         - name: python-env-volume
           mountPath: /app
+          subPath: app
       volumes:
         - name: python-env-volume
           configMap:
-            name: configmap-dev-env
+            name: python-env
       restartPolicy: Always
 ---

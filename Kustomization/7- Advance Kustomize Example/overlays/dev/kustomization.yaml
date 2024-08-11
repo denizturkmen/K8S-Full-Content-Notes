@@ -14,7 +14,7 @@ secretGenerator:
       - secret-dev-env.env
 
 configMapGenerator:
-  - name: configmap-dev-env
+  - name: python-env
     envs:
       - configmap-dev-env
 
