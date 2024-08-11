@@ -55,13 +55,12 @@ spec:
         ports:
         - containerPort: 5000
           name: python
-      #   volumeMounts:
-      #   - name: python-index-volume
-      #     mountPath: /usr/share/python/html/index.html
-      #     subPath: index.html
-      # volumes:
-      #   - name: python-index-volume
-      #     configMap:
-      #       name: python-index
+        volumeMounts:
+        - name: python-env-volume
+          mountPath: /app
+      volumes:
+        - name: python-env-volume
+          configMap:
+            name: configmap-dev-env
       restartPolicy: Always
 ---
