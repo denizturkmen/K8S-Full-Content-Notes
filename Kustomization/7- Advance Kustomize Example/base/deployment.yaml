@@ -56,12 +56,10 @@ spec:
         - containerPort: 5000
           name: python
         volumeMounts:
-        - name: python-env-volume
-          mountPath: /app
-          subPath: app
+        - name: python-volume
+          mountPath: /app/config  
       volumes:
-        - name: python-env-volume
+        - name: python-volume
           configMap:
             name: python-env
       restartPolicy: Always
----
