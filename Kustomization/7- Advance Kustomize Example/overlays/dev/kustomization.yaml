@@ -13,6 +13,11 @@ secretGenerator:
     envs:
       - secret-dev-env.env
 
+configMapGenerator:
+  - name: configmap-dev-env
+    envs:
+      - configmap-dev-env
+
 images:
 - name: denizturkmen/python
   newTag: "env1"
