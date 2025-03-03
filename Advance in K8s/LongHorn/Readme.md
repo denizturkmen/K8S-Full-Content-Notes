@@ -7,17 +7,38 @@
 curl -sSfL https://raw.githubusercontent.com/longhorn/longhorn/v1.8.0/scripts/environment_check.sh | bash
 
 # Trouble_1
+[ERROR] Not found: jq
+[INFO]  Please install missing dependencies: kubectl jq mktemp sort printf.
 
+# solution
+sudo apt install -y jq
 
 # Trouble_2
+[ERROR] Neither iscsid.service nor iscsid.socket is running on k8s-master-1
+
+# solution
+sudo apt-get install -y open-iscsi
+
 # Trouble_3
+[ERROR] kernel module iscsi_tcp is not enabled on k8s-master-1
+
+# solution
+lsmod|grep iscsi
+sudo modprobe iscsi_tcp
+lsmod|grep iscsi
+
+# Trouble_4
+[ERROR] nfs-common is not found in k8s-master-1.
+
+# solution
+sudo apt install -y nfs-common
 
 ```
 
 ## Install
 ``` bash
 # dowland via wget: latest
-wget https://github.com/longhorn/longhorn/releases/download/v1.6.1/longhorn.yaml
+wget https://github.com/longhorn/longhorn/releases/download/v1.8.0/longhorn.yaml
 
 # Install
 kubectl apply -f longhorn.yaml
@@ -27,6 +48,10 @@ kubectl get all -n longhorn-system
 
 # stable: v1.7.3
 kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.7.3/deploy/longhorn.yaml
+
+# longhorn-iscsi
+kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.7.3/deploy/prerequisite/longhorn-iscsi-installation.yaml
+kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.8.0/deploy/prerequisite/longhorn-iscsi-installation.yaml
 
 ```
 
