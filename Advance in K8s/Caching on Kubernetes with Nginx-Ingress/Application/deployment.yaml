@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  web-ui
+  namespace: default
+  labels:
+    app:  web-ui
+spec:
+  selector:
+    matchLabels:
+      app: web-ui
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  web-ui
+    spec:
+      containers:
+      - name:  web-ui
+        image:  denizturkmen/webui:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort:  80
+          name:  web-ui
+      restartPolicy: Always

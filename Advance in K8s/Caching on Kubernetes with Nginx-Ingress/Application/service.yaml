@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-ui
+  namespace: default
+spec:
+  selector:
+    app: web-ui
+  type: ClusterIP
+  ports:
+  - name: web-ui
+    protocol: TCP
+    port: 80
+    targetPort: 80
