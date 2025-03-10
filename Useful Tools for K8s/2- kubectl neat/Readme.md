@@ -32,6 +32,12 @@ kubectl krew install neat
 # verify
 kubectl neat --help
 
+```
+
+## Referance
+``` bash
+https://krew.sigs.k8s.io/docs/user-guide/setup/install/
+
 
 
 ```
