@@ -61,3 +61,6 @@ helm upgrade app --set image.tag=wrong --timeout=30s --atomic --cleanup-on-fail 
 
 
 ```
+
+
+

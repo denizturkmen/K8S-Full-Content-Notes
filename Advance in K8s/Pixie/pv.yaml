@@ -1,0 +1,125 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: elastic-pv-data-0
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+  storageClassName: manual
+  hostPath:
+    path: "/mnt/data/elasticsearch/0"  # Update this path based on your storage setup
+  claimRef:
+    namespace: plc
+    name: elasticsearch-data-pl-elastic-es-data-0 
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: elastic-pv-master-0
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+  storageClassName: manual
+  hostPath:
+    path: "/mnt/data/elasticsearch/1"  # Update this path based on your storage setup
+  claimRef:
+    namespace: plc
+    name: elasticsearch-data-pl-elastic-es-master-0
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: elastic-pv-master-1
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+  storageClassName: manual
+  hostPath:
+    path: "/mnt/data/elasticsearch/2"  # Update this path based on your storage setup
+  claimRef:
+    namespace: plc
+    name: elasticsearch-data-pl-elastic-es-master-1
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nats-sts-0
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+  storageClassName: manual
+  hostPath:
+    path: "/mnt/data/elasticsearch"  # Update this path based on your storage setup
+  claimRef:
+    namespace: plc
+    name: nats-sts-vol-pl-nats-0
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nats-sts-1
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+  storageClassName: manual
+  hostPath:
+    path: "/mnt/data/elasticsearch"  # Update this path based on your storage setup
+  claimRef:
+    namespace: plc
+    name: nats-sts-vol-pl-nats-1
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nats-sts-2
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+  storageClassName: manual
+  hostPath:
+    path: "/mnt/data/elasticsearch"  # Update this path based on your storage setup
+  claimRef:
+    namespace: plc
+    name: nats-sts-vol-pl-nats-2
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-1
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+  storageClassName: manual
+  hostPath:
+    path: "/mnt/data/postgres"  # Update this path based on your storage setup
+  claimRef:
+    namespace: plc
+    name: postgres-pv-claim

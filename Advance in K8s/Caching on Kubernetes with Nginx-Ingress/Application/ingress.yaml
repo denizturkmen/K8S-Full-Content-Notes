@@ -16,3 +16,15 @@ spec:
             name: web-ui
             port:
               number: 80
+
+              spec:
+  containers:
+    - name: controller
+      args:
+        - /nginx-ingress-controller
+        - --enable-annotation-validation=false
+        - --allow-snippet-annotations=true
+      volumes:
+      - name: nginx-cache-config
+        configMap:
+          name: ingress-nginx-controller
