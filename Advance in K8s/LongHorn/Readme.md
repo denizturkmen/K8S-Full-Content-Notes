@@ -18,6 +18,8 @@ sudo apt install -y jq
 
 # solution
 sudo apt-get install -y open-iscsi
+sudo systemctl enable iscsid
+sudo systemctl start iscsid
 
 # Trouble_3
 [ERROR] kernel module iscsi_tcp is not enabled on k8s-master-1
@@ -33,7 +35,25 @@ lsmod|grep iscsi
 # solution
 sudo apt install -y nfs-common
 
+# Trouble_5
+[ERROR] cryptsetup is not found in k8s-master-1.
+
+# solution
+sudo apt-get install -y  cryptsetup 
+
 ```
+
+## Install Helm
+``` bash
+# install w
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+sudo apt-get install apt-transport-https --yes
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install -y helm
+
+```
+
 
 ## Install
 ``` bash
@@ -52,6 +72,67 @@ kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.7.3/depl
 # longhorn-iscsi
 kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.7.3/deploy/prerequisite/longhorn-iscsi-installation.yaml
 kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.8.0/deploy/prerequisite/longhorn-iscsi-installation.yaml
+
+```
+
+# Install longhorn with Helm
+``` bash
+# add repo
+helm repo add longhorn https://charts.longhorn.io
+
+# update
+helm repo update
+
+# specific version list
+helm search repo repo_name --versions
+helm search repo longhorn/longhorn --versions
+
+# specific version install: disable metrics
+helm show values longhorn/longhorn --version 1.6.1 > longhorn-values.yaml
+helm install longhorn-poc longhorn/longhorn \
+  --namespace longhorn-system \
+  --version 1.6.1 \
+  --create-namespace \
+  -f longhorn-values.yaml
+
+# list
+helm list -A
+helm list -n namespace
+
+
+# upgrade: enable metrics. before dowland yaml to local machine
+helm get values release_name -n longhorn-system --output yaml
+helm get values longhorn-poc  -n longhorn-system --output yaml
+helm get values longhorn-poc  -n longhorn-system --output yaml > longhorn-current-values.yaml
+---
+helm get manifest longhorn-poc  -n longhorn-system > longhorn-manifest.yaml
+---
+helm get values longhorn-poc  -n longhorn-system > longhorn-values-backup.yaml
+helm get values longhorn-poc  -n longhorn-system --all > longhorn-values-complete.yaml
+helm get values longhorn-poc  -n longhorn-system --output yaml > longhorn-values-backup.yaml
+---
+helm upgrade longhorn-poc  longhorn/longhorn \
+  --namespace longhorn-system \
+  --set manager.service.ports.metrics=9500
+
+helm upgrade longhorn-poc  longhorn/longhorn \
+  --namespace longhorn-system \
+  --set defaultSettings.telemetry.enableMetric=true \
+  --set manager.service.ports.metrics=9500
+
+# upgrade
+helm upgrade longhorn-poc longhorn/longhorn \
+  -f longhorn-values.yaml
+
+# install
+helm install longhorn-poc longhorn/longhorn \
+  --namespace longhorn-system \
+  --create-namespace
+
+# pod size
+kubectl exec -it volume-test -- sh
+dd if=/dev/zero of=/data/testfile bs=1M count=100
+
 
 ```
 
