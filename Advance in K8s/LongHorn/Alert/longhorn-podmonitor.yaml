@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: longhorn-podmonitor
+  namespace: monitoring
+  labels:
+    release: prometheus-stack   # ATTENTION: Prometheus CRD wants this
+spec:
+  namespaceSelector:
+    matchNames:
+      - longhorn-system
+  selector:
+    matchLabels:
+      app: longhorn-manager
+  podMetricsEndpoints:
+    - port: manager
+      interval: 30s

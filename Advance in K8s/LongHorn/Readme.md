@@ -109,12 +109,13 @@ helm get manifest longhorn-poc  -n longhorn-system > longhorn-manifest.yaml
 ---
 helm get values longhorn-poc  -n longhorn-system > longhorn-values-backup.yaml
 helm get values longhorn-poc  -n longhorn-system --all > longhorn-values-complete.yaml
+helm upgrade --install longhorn-poc longhorn/longhorn --namespace longhorn-system -f longhorn-values-complete.yaml
 helm get values longhorn-poc  -n longhorn-system --output yaml > longhorn-values-backup.yaml
 ---
+# Nope
 helm upgrade longhorn-poc  longhorn/longhorn \
   --namespace longhorn-system \
   --set manager.service.ports.metrics=9500
-
 helm upgrade longhorn-poc  longhorn/longhorn \
   --namespace longhorn-system \
   --set defaultSettings.telemetry.enableMetric=true \
@@ -129,13 +130,48 @@ helm install longhorn-poc longhorn/longhorn \
   --namespace longhorn-system \
   --create-namespace
 
+# deploy pods
+kubectl apply -f test-pvc.yaml
+kubectl apply -f test-pvc-1.yaml
+
 # pod size
 kubectl exec -it volume-test -- sh
 dd if=/dev/zero of=/data/testfile bs=1M count=100
 
+# rollback
+helm rollback longhorn-poc -n longhorn-system
+```
+
+
+## Integration and Implementation Prometheus-Stack
+``` bash
+# Check metrics
+cat longhorn-values-complete.yaml
+
+# Check metrics
+curl http://pods_name:ports_number/metrics
+curl http://192.168.1.7:32322/metrics
+
+# actual metrics
+longhorn_volume_actual_size_bytes
+
+# creating: headliness service. There is a longhorn-metrics on longhorn-system ns
+kubectl apply -f longhorn-metrics-service.yaml
+
+# creating pod monitor
+kubectl apply -f longhorn-podmonitor.yaml
+
 
 ```
 
+
+## useful
+``` bash
+kubectl get settings -n longhorn-system
+
+
+
+```
 
 ## NFS Enable RWX
 ``` bash

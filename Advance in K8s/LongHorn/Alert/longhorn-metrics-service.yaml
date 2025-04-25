@@ -1,0 +1,15 @@
+longhorn-metrics-service.yamlapiVersion: v1
+kind: Service
+metadata:
+  name: longhorn-metrics
+  namespace: longhorn-system
+  labels:
+    app: longhorn-manager
+spec:
+  clusterIP: None
+  selector:
+    app: longhorn-manager # metric service label
+  ports:
+    - name: manager
+      port: 9500
+      targetPort: 9500

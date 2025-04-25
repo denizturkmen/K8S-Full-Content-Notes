@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: longhorn-metrics-monitor
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: longhorn-metrics
+  namespaceSelector:
+    matchNames:
+      - longhorn-system
+  endpoints:
+    - port: http
+      interval: 30s
