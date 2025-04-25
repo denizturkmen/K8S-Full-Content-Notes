@@ -1,0 +1,30 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: longhorn-pvc-usage-rules
+  namespace: monitoring
+  labels:
+    release: prometheus-stack   # Bu önemli, Prometheus bunu izleyecek
+spec:
+  groups:
+  - name: longhorn-pvc-usage
+    rules:
+    - alert: LonghornPVCUsageHigh
+      expr: |
+        (longhorn_volume_actual_size_bytes / longhorn_volume_capacity_bytes) * 100 > 80
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "PVC usage is above 80% on volume {{ $labels.volume }}"
+        description: "PVC {{ $labels.volume }} is using more than 80% capacity."
+
+    - alert: LonghornPVCUsageCritical
+      expr: |
+        (longhorn_volume_actual_size_bytes / longhorn_volume_capacity_bytes) * 100 > 90
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: "PVC usage is above 90% on volume {{ $labels.volume }}"
+        description: "PVC {{ $labels.volume }} is critically high."

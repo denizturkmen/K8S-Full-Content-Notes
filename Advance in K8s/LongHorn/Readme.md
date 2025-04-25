@@ -161,6 +161,9 @@ kubectl apply -f longhorn-metrics-service.yaml
 # creating pod monitor
 kubectl apply -f longhorn-podmonitor.yaml
 
+#
+kubectl get prometheusrule -n monitoring
+
 
 ```
 
