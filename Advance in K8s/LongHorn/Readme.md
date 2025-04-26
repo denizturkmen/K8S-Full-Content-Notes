@@ -164,6 +164,7 @@ kubectl apply -f longhorn-podmonitor.yaml
 #
 kubectl get prometheusrule -n monitoring
 
+(longhorn_volume_actual_size_bytes / longhorn_volume_capacity_bytes) * 100 > 77
 
 ```
 
