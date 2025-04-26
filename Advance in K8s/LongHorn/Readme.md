@@ -166,6 +166,11 @@ kubectl get prometheusrule -n monitoring
 
 (longhorn_volume_actual_size_bytes / longhorn_volume_capacity_bytes) * 100 > 77
 
+
+grafana.ini:
+  alerting:
+    no_data_alerts: false
+
 ```
 
 
