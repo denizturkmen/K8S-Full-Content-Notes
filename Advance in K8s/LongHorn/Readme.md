@@ -179,8 +179,17 @@ grafana.ini:
 kubectl get settings -n longhorn-system
 
 
+```
+
+## Grafana
+``` bash
+ notificatiın polict
+ contanct point
+ alert rule
+
 
 ```
+
 
 ## NFS Enable RWX
 ``` bash
