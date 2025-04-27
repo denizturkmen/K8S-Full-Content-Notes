@@ -1,6 +1,40 @@
 # The Longhorm Installation and Configuration in Kubernetes
 
 
+## Pre-Requisties for Longhorn Alert
+``` bash
+install longhorn
+install kube-promethues-stack
+enable service monitor into longorn
+creating longhorn-metrics-service -> headliness service
+creating longhorn-podmonitor
+login to slack
+creating slack canal -> alarm -> go to https://api.slack.com/apps
+creating incoming webhook
+creating pvc test and test -> dummy data
+creating contact point
+  slack-notification
+  Slack
+  Recipient -> canal_name
+  webhook
+  Notification settings
+  test
+creating notification policy
+  New child Policy
+  label -> severity = critical # Important
+  contact point -> slack-notification
+creating alert rule
+  alert_rule_name -> grafana-longhorn-alarm 
+  Define query and alert condition ->  (longhorn_volume_actual_size_bytes / longhorn_volume_capacity_bytes) * 100 > 80 # percent %80
+  Add folder and labels -> longhorn folder -> severity = critical # label value is very important. Must be the same as the notification policy label
+  Set evaluation behavior -> longhorn-check-group
+    Alert state if no data or all values are null -> Normal
+    Alert state if execution error or timeout -> Alerting
+  Configure notifications
+    contact point -> slack-notification
+
+```
+
 ## Installation Requirements
 ``` bash
 # Using the Environment Check Script
@@ -163,8 +197,8 @@ kubectl apply -f longhorn-podmonitor.yaml
 
 #
 kubectl get prometheusrule -n monitoring
-
-(longhorn_volume_actual_size_bytes / longhorn_volume_capacity_bytes) * 100 > 77
+kubectl get podmonitors.monitoring.coreos.com -n monitoring
+(longhorn_volume_actual_size_bytes / longhorn_volume_capacity_bytes) * 100 > 80
 
 
 grafana.ini:
@@ -179,11 +213,14 @@ grafana.ini:
 kubectl get settings -n longhorn-system
 
 
+kubectl patch svc -n namespace svc_name --type='json' -p '[{"op":"replace","path":"/spec/type","value":"NodePort"}]'
+
+
 ```
 
 ## Grafana
 ``` bash
- notificatiın polict
+ notificatiın policy
  contanct point
  alert rule
 
