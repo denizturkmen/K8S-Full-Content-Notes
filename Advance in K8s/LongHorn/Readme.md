@@ -146,6 +146,12 @@ helm get values longhorn-poc  -n longhorn-system --all > longhorn-values-complet
 helm upgrade --install longhorn-poc longhorn/longhorn --namespace longhorn-system -f longhorn-values-complete.yaml
 helm get values longhorn-poc  -n longhorn-system --output yaml > longhorn-values-backup.yaml
 ---
+# Yes
+helm upgrade longhorn-poc longhorn/longhorn \
+  --namespace longhorn-system \
+  --version 1.6.1 \
+  --set metrics.serviceMonitor.enabled=true
+
 # Nope
 helm upgrade longhorn-poc  longhorn/longhorn \
   --namespace longhorn-system \
