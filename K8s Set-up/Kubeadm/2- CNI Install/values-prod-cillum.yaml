@@ -1,0 +1,40 @@
+# values-prod-cillum.yaml
+kubeProxyReplacementHealthzBindAddr: ""
+routingMode: tunnel
+enableIPv4Masquerade: true
+enableIPv6Masquerade: true
+
+ipv6:
+  enabled: false
+
+autoDirectNodeRoutes: true
+
+
+hubble:
+  enabled: true
+  relay:
+    enabled: true
+  ui:
+    enabled: true
+
+operator:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 2Gi
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 512Mi
+  limits:
+    cpu: 2
+    memory: 4Gi
+
+
+---
+
