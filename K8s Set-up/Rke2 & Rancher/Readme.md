@@ -24,6 +24,12 @@ free -h
 
 ## Install Master Node
 ``` bash
+# Before running the install script, create the config file
+sudo mkdir -p /etc/rancher/rke2
+sudo tee /etc/rancher/rke2/config.yaml > /dev/null <<EOF
+node-name: k8s-master-1
+EOF
+
 # install
 curl -sfL https://get.rke2.io | sudo INSTALL_RKE2_TYPE="server" sh -
 
@@ -44,7 +50,7 @@ sudo cat /var/lib/rancher/rke2/server/node-token
 
 ```
 
-## Install Worker-Nod
+## Install Worker-Node
 ``` bash
 # install
 curl -sfL https://get.rke2.io | sudo INSTALL_RKE2_TYPE="agent" sh -
@@ -98,6 +104,17 @@ kubectl version
 
 ```
 
+## Install Metric Server
+``` bash
+# install
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.0/components.yaml
+
+# check
+kubectl get po -n kube-system
+kubectl top po
+
+```
+
 ## Install Containerd
 ``` bash
 # Install required packages
@@ -128,8 +145,85 @@ sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/c
 
 ```
 
-## 
+## Install Helm
 ``` bash
+# dowland
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+sudo apt-get install apt-transport-https --yes
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+
+# install
+sudo apt-get update
+sudo apt-get install -y helm
+
+```
+
+## Creating wildcard ssl with certbot
+``` bash
+# install certbot on ubuntu
+sudo apt update 
+sudo apt install -y certbot
+
+# wildcard ssl generate
+sudo certbot certonly --manual --preferred-challenges dns -d '*.your_domain.com'
+sudo certbot certonly --manual --preferred-challenges dns -d '*.devopskings.com.tr'
+
+```
+
+## Install Rancher with HELM
+``` bash
+# Create ns
+kubectl create namespace cattle-system
+
+# Create Kubernetes TLS Secret with Your Certs
+kubectl -n cattle-system create secret tls tls-rancher-ingress \
+  --cert=rancher.crt \
+  --key=rancher.key
+
+# check
+kubectl get secrets -n cattle-system
+
+# adding repo
+helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
+helm repo update
+
+# install
+helm install rancher rancher-latest/rancher \
+  --namespace cattle-system \
+  --set hostname=rancher.devopskings.com.tr \
+  --set ingress.tls.source=secret \
+  --set replicas=1 \
+  --set bootstrapPassword=chBoBQv6T6gB
+  
+---
+helm upgrade --install rancher rancher-latest/rancher \
+  --namespace cattle-system \
+  --set hostname=rancher.devopskings.com.tr \
+  --set replicas=1 \
+  --set ingress.tls.source=secret \
+  --set bootstrapPassword=admin
+---
+helm install rancher rancher-latest/rancher \
+  --namespace cattle-system \
+  --set hostname=rancher.example.com \
+  --set replicas=2 \
+  --set ingress.tls.source=secret \
+  --set bootstrapPassword=admin \
+  --set affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution[0].labelSelector.matchExpressions[0].key=app \
+  --set affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution[0].labelSelector.matchExpressions[0].operator=In \
+  --set affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution[0].labelSelector.matchExpressions[0].values[0]=rancher \
+  --set affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution[0].topologyKey=kubernetes.io/hostname \
+  --set resources.requests.cpu=500m \
+  --set resources.requests.memory=1Gi \
+  --set resources.limits.cpu=1 \
+  --set resources.limits.memory=2Gi \
+  --set autoscaling.enabled=true \
+  --set autoscaling.minReplicas=2 \
+  --set autoscaling.maxReplicas=5 \
+  --set autoscaling.targetCPUUtilizationPercentage=80
+---
+
+
 
 
 ```
