@@ -55,8 +55,7 @@ sudo cat /var/lib/rancher/rke2/server/node-token
 # install
 curl -sfL https://get.rke2.io | sudo INSTALL_RKE2_TYPE="agent" sh -
 
-# Preparing config file
-# Creating file
+# Preparing config file: Creating file
 sudo mkdir -p /etc/rancher/rke2
 
 # config file: template
@@ -68,7 +67,8 @@ EOF
 # apply
 sudo tee /etc/rancher/rke2/config.yaml > /dev/null <<EOF
 server: https://192.168.1.41:9345
-token: K108da33a869404acbebdf016194560bc399ee98866f311b38d6a39aeb9c02be986::server:c914c6ece114979d54f8570ca29efa92
+node-name: k8s-worker-1
+token: K10347e1369de4d6b2c4d7195ad6df8738a1d26b458ac997ef99ded44f09c7c7289::server:bed45765f5ef39e91feb99100b83e7ba
 EOF
 
 # Starting Service
@@ -76,7 +76,7 @@ sudo systemctl enable rke2-agent.service
 sudo systemctl start rke2-agent.service
 
 # logs
-journalctl -u rke2-server -f
+journalctl -u rke2-agent -f
 
 ```
 
