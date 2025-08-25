@@ -68,7 +68,7 @@ EOF
 sudo tee /etc/rancher/rke2/config.yaml > /dev/null <<EOF
 server: https://192.168.1.41:9345
 node-name: k8s-worker-1
-token: K10347e1369de4d6b2c4d7195ad6df8738a1d26b458ac997ef99ded44f09c7c7289::server:bed45765f5ef39e91feb99100b83e7ba
+token: K10039a860835a6e123bf568c8e775ea574170c46b03da20a4413d9beef5b6d75e8::server:69f1916a54924276f318570f09b41678
 EOF
 
 # Starting Service
